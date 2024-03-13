@@ -278,7 +278,7 @@ namespace PokerGame
             this.foldButton.Enabled = true;
             this.playerTurnLabel.Text = "Now it's your turn";
             this.playerTurnLabel.BackColor = Color.Green;
-            this.tunTimeLabel.Visible = true;
+            this.turnTimeLabel.Visible = true;
             this.seconds = 40;
             this.countDownTimer.Start();
         }
@@ -297,8 +297,8 @@ namespace PokerGame
             this.valueTextBox.Text = "0";
             this.playerTurnLabel.Text = "It's not your turn right now";
             this.playerTurnLabel.BackColor = Color.Red;
-            this.tunTimeLabel.Visible = false;
-            this.tunTimeLabel.Text = "";
+            this.turnTimeLabel.Visible = false;
+            this.turnTimeLabel.Text = "";
         }
 
         public void TheWinnerIs(string username)
@@ -310,7 +310,7 @@ namespace PokerGame
 
         private void countDownTimer_Tick(object sender, EventArgs e)
         {
-            this.tunTimeLabel.Text = this.seconds--.ToString();
+            this.turnTimeLabel.Text = this.seconds--.ToString();
             if (this.seconds < 0)
             {
                 this.foldButton_Click(null,null);

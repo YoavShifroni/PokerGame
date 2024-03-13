@@ -64,6 +64,9 @@
     <Compile Include="ClientServerProtocol.cs" />
     <Compile Include="ConnectionWithServer.cs" />
     <Compile Include="HandleCommandsFromServer.cs" />
+    <Compile Include="LabelCircle.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

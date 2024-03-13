@@ -53,8 +53,8 @@
             this.nameAndBetLabel = new System.Windows.Forms.Label();
             this.totalMoneyLabel = new System.Windows.Forms.Label();
             this.allTimeProfitLabel = new System.Windows.Forms.Label();
-            this.tunTimeLabel = new System.Windows.Forms.Label();
             this.countDownTimer = new System.Windows.Forms.Timer(this.components);
+            this.turnTimeLabel = new PokerGame.LabelCircle();
             ((System.ComponentModel.ISupportInitialize)(this.playerFirstCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playerSecondCardPictureBox)).BeginInit();
@@ -336,21 +336,21 @@
             this.allTimeProfitLabel.Text = "All time profit: ";
             this.allTimeProfitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tunTimeLabel
-            // 
-            this.tunTimeLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.tunTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tunTimeLabel.Location = new System.Drawing.Point(1906, 148);
-            this.tunTimeLabel.Name = "tunTimeLabel";
-            this.tunTimeLabel.Size = new System.Drawing.Size(164, 123);
-            this.tunTimeLabel.TabIndex = 28;
-            this.tunTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.tunTimeLabel.Visible = false;
-            // 
             // countDownTimer
             // 
             this.countDownTimer.Interval = 1000;
             this.countDownTimer.Tick += new System.EventHandler(this.countDownTimer_Tick);
+            // 
+            // turnTimeLabel
+            // 
+            this.turnTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.turnTimeLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.turnTimeLabel.Location = new System.Drawing.Point(1889, 149);
+            this.turnTimeLabel.Name = "turnTimeLabel";
+            this.turnTimeLabel.Size = new System.Drawing.Size(164, 123);
+            this.turnTimeLabel.TabIndex = 29;
+            this.turnTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.turnTimeLabel.Visible = false;
             // 
             // GameBoard
             // 
@@ -359,7 +359,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(2082, 1168);
-            this.Controls.Add(this.tunTimeLabel);
+            this.Controls.Add(this.turnTimeLabel);
             this.Controls.Add(this.allTimeProfitLabel);
             this.Controls.Add(this.totalMoneyLabel);
             this.Controls.Add(this.nameAndBetLabel);
@@ -425,7 +425,7 @@
         private System.Windows.Forms.Label nameAndBetLabel;
         private System.Windows.Forms.Label totalMoneyLabel;
         private System.Windows.Forms.Label allTimeProfitLabel;
-        private System.Windows.Forms.Label tunTimeLabel;
         private System.Windows.Forms.Timer countDownTimer;
+        private LabelCircle turnTimeLabel;
     }
 }
