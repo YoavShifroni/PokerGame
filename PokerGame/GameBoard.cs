@@ -15,6 +15,8 @@ namespace PokerGame
         private bool clickedForTheSecondTime = false;
         private bool isDargging = false;
         public int playerMoney;
+        public int allTimeProfit;
+        private int seconds;
         private int totalBetMoney =0;
         public string username = "";
         private int minimumBet;
@@ -182,7 +184,8 @@ namespace PokerGame
         public void SetPlayerMoney()
         {
             this.MoneyTheClientHaveLabel.Text = "Current Money: " +  this.playerMoney.ToString();
-        }
+            this.allTimeProfitLabel.Text = "All Time Profit: " + this.allTimeProfit.ToString();
+         }
 
         private void valueTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -205,6 +208,15 @@ namespace PokerGame
                     this.valueTextBox.Text = "0";
                     this.trackBar1.Value = 0;
                     return;
+                }
+                if(valueTextBox.Text.Length >= 2)
+                {
+                    while (valueTextBox.Text.StartsWith("0"))
+                    {
+                        valueTextBox.Text = valueTextBox.Text.Substring(1);
+                        return;
+
+                    }
                 }
                 int value = Convert.ToInt32(valueTextBox.Text);
                 if (value > this.playerMoney)
@@ -266,6 +278,9 @@ namespace PokerGame
             this.foldButton.Enabled = true;
             this.playerTurnLabel.Text = "Now it's your turn";
             this.playerTurnLabel.BackColor = Color.Green;
+            this.tunTimeLabel.Visible = true;
+            this.seconds = 40;
+            this.countDownTimer.Start();
         }
 
         private void AfterMyTurn()
@@ -282,6 +297,8 @@ namespace PokerGame
             this.valueTextBox.Text = "0";
             this.playerTurnLabel.Text = "It's not your turn right now";
             this.playerTurnLabel.BackColor = Color.Red;
+            this.tunTimeLabel.Visible = false;
+            this.tunTimeLabel.Text = "";
         }
 
         public void TheWinnerIs(string username)
@@ -291,5 +308,14 @@ namespace PokerGame
 
         }
 
+        private void countDownTimer_Tick(object sender, EventArgs e)
+        {
+            this.tunTimeLabel.Text = this.seconds--.ToString();
+            if (this.seconds < 0)
+            {
+                this.foldButton_Click(null,null);
+                this.countDownTimer.Stop();
+            }
+        }
     }
 }

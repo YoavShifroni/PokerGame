@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameBoard));
             this.playerFirstCardPictureBox = new System.Windows.Forms.PictureBox();
             this.raiseButton = new System.Windows.Forms.Button();
@@ -51,6 +52,9 @@
             this.playerTurnLabel = new System.Windows.Forms.Label();
             this.nameAndBetLabel = new System.Windows.Forms.Label();
             this.totalMoneyLabel = new System.Windows.Forms.Label();
+            this.allTimeProfitLabel = new System.Windows.Forms.Label();
+            this.tunTimeLabel = new System.Windows.Forms.Label();
+            this.countDownTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.playerFirstCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playerSecondCardPictureBox)).BeginInit();
@@ -206,7 +210,7 @@
             // MoneyTheClientHaveLabel
             // 
             this.MoneyTheClientHaveLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MoneyTheClientHaveLabel.Location = new System.Drawing.Point(25, 981);
+            this.MoneyTheClientHaveLabel.Location = new System.Drawing.Point(25, 943);
             this.MoneyTheClientHaveLabel.Name = "MoneyTheClientHaveLabel";
             this.MoneyTheClientHaveLabel.Size = new System.Drawing.Size(423, 72);
             this.MoneyTheClientHaveLabel.TabIndex = 13;
@@ -322,6 +326,32 @@
             this.totalMoneyLabel.Text = "0";
             this.totalMoneyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // allTimeProfitLabel
+            // 
+            this.allTimeProfitLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.allTimeProfitLabel.Location = new System.Drawing.Point(25, 1048);
+            this.allTimeProfitLabel.Name = "allTimeProfitLabel";
+            this.allTimeProfitLabel.Size = new System.Drawing.Size(423, 72);
+            this.allTimeProfitLabel.TabIndex = 27;
+            this.allTimeProfitLabel.Text = "All time profit: ";
+            this.allTimeProfitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tunTimeLabel
+            // 
+            this.tunTimeLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.tunTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tunTimeLabel.Location = new System.Drawing.Point(1906, 148);
+            this.tunTimeLabel.Name = "tunTimeLabel";
+            this.tunTimeLabel.Size = new System.Drawing.Size(164, 123);
+            this.tunTimeLabel.TabIndex = 28;
+            this.tunTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tunTimeLabel.Visible = false;
+            // 
+            // countDownTimer
+            // 
+            this.countDownTimer.Interval = 1000;
+            this.countDownTimer.Tick += new System.EventHandler(this.countDownTimer_Tick);
+            // 
             // GameBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,6 +359,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(2082, 1168);
+            this.Controls.Add(this.tunTimeLabel);
+            this.Controls.Add(this.allTimeProfitLabel);
             this.Controls.Add(this.totalMoneyLabel);
             this.Controls.Add(this.nameAndBetLabel);
             this.Controls.Add(this.playerTurnLabel);
@@ -392,5 +424,8 @@
         private System.Windows.Forms.Label playerTurnLabel;
         private System.Windows.Forms.Label nameAndBetLabel;
         private System.Windows.Forms.Label totalMoneyLabel;
+        private System.Windows.Forms.Label allTimeProfitLabel;
+        private System.Windows.Forms.Label tunTimeLabel;
+        private System.Windows.Forms.Timer countDownTimer;
     }
 }

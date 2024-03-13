@@ -31,7 +31,7 @@ namespace PokerGame
             }
             if (clientServerProtocol.command.Equals(Command.START_GAME))
             {
-                this.registrationLoginForm.Invoke(new Action(() => this.registrationLoginForm.MoveToGameBoard(clientServerProtocol.playerMoney)));
+                this.registrationLoginForm.Invoke(new Action(() => this.registrationLoginForm.MoveToGameBoard(clientServerProtocol.playerMoney,clientServerProtocol.allTimeProfit)));
             }
             if(clientServerProtocol.command.Equals(Command.SEND_STARTING_CARDS_TO_PLAYER))
             {

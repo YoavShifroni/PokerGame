@@ -49,7 +49,7 @@ namespace PokerGame
                 this.NumberOfConnectedPlayersLabel.Text = "Number Of Players Connected: " + numberOfConnectedPlayers.ToString();
             }
 
-            if(count>=2 && count<=8)
+            if(count>=2 && count<=10)
             {
                 this.StartButton.Enabled = true;
             }
