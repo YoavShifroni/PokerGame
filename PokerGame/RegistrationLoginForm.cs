@@ -54,12 +54,17 @@ namespace PokerGame
             this.gameBoard.username = username;
         }
 
-        public void MoveToGameBoard(int money, int allTimeProfit)
+        public void MoveToGameBoard(ClientServerProtocol clientServerProtocol)
         {
             this.waitingRoom.Visible = false;
             this.gameBoard.Visible = true;
-            this.gameBoard.playerMoney = money;
-            this.gameBoard.allTimeProfit = allTimeProfit;
+            this.gameBoard.playerMoney = clientServerProtocol.playerMoney;
+            this.gameBoard.allTimeProfit = clientServerProtocol.allTimeProfit;
+            this.gameBoard.playerIndex = clientServerProtocol.playerIndex;
+            this.gameBoard.dealerIndex = clientServerProtocol.dealerIndex;
+            this.gameBoard.smallBlindIndex = clientServerProtocol.smallBlindIndex;
+            this.gameBoard.bigBlindIndex = clientServerProtocol.bigBlindIndex;
+            this.gameBoard.playersNumber = clientServerProtocol.playersNumber;
             this.gameBoard.SetPlayerMoney();
         }
 

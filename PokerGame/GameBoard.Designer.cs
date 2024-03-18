@@ -55,6 +55,7 @@
             this.allTimeProfitLabel = new System.Windows.Forms.Label();
             this.countDownTimer = new System.Windows.Forms.Timer(this.components);
             this.turnTimeLabel = new PokerGame.LabelCircle();
+            this.youAreTheDealerLabel = new PokerGame.LabelCircle();
             ((System.ComponentModel.ISupportInitialize)(this.playerFirstCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playerSecondCardPictureBox)).BeginInit();
@@ -352,6 +353,19 @@
             this.turnTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.turnTimeLabel.Visible = false;
             // 
+            // youAreTheDealerLabel
+            // 
+            this.youAreTheDealerLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.youAreTheDealerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.youAreTheDealerLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.youAreTheDealerLabel.Location = new System.Drawing.Point(1571, 727);
+            this.youAreTheDealerLabel.Name = "youAreTheDealerLabel";
+            this.youAreTheDealerLabel.Size = new System.Drawing.Size(177, 157);
+            this.youAreTheDealerLabel.TabIndex = 30;
+            this.youAreTheDealerLabel.Text = "Dealer";
+            this.youAreTheDealerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.youAreTheDealerLabel.Visible = false;
+            // 
             // GameBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,6 +373,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(2082, 1168);
+            this.Controls.Add(this.youAreTheDealerLabel);
             this.Controls.Add(this.turnTimeLabel);
             this.Controls.Add(this.allTimeProfitLabel);
             this.Controls.Add(this.totalMoneyLabel);
@@ -427,5 +442,6 @@
         private System.Windows.Forms.Label allTimeProfitLabel;
         private System.Windows.Forms.Timer countDownTimer;
         private LabelCircle turnTimeLabel;
+        private LabelCircle youAreTheDealerLabel;
     }
 }

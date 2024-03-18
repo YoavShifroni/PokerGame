@@ -17,9 +17,15 @@ namespace PokerGame
         public int playerMoney;
         public int allTimeProfit;
         private int seconds;
+        private int cardsSeconds;
         private int totalBetMoney =0;
         public string username = "";
-        private int minimumBet;
+        public int minimumBet;
+        public int playerIndex;
+        public int dealerIndex;
+        public int smallBlindIndex;
+        public int bigBlindIndex;
+        public int playersNumber;
 
         public GameBoard()
         {
@@ -90,12 +96,15 @@ namespace PokerGame
                 this.firstCardPictureBox.Image = (Image)Properties.Resources.ResourceManager.GetObject(cards[0]);
                 this.firstCardPictureBox.Refresh();
                 this.firstCardPictureBox.Visible = true;
+                System.Threading.Thread.Sleep(2000);
             }
             if (cards[1] != null && cards[1].Length > 0)
             {
+                
                 this.secondCardPictureBox.Image = (Image)Properties.Resources.ResourceManager.GetObject(cards[1]);
                 this.secondCardPictureBox.Refresh();
                 this.secondCardPictureBox.Visible = true;
+                System.Threading.Thread.Sleep(2000);          
             }
             if (cards[2] != null && cards[2].Length > 0)
             {
@@ -103,17 +112,18 @@ namespace PokerGame
                 this.thirdCardPictureBox.Refresh();
                 this.thirdCardPictureBox.Visible = true;
             }
+
             if (cards[3] != null && cards[3].Length > 0)
             {
                 this.forthCardPictureBox.Image = (Image)Properties.Resources.ResourceManager.GetObject(cards[3]);
                 this.forthCardPictureBox.Refresh();
-                this.forthCardPictureBox.Visible = true;
+                this.forthCardPictureBox.Visible = true;     
             }
             if (cards[4] != null && cards[4].Length > 0)
             {
                 this.fifthCardPictureBox.Image = (Image)Properties.Resources.ResourceManager.GetObject(cards[4]);
                 this.fifthCardPictureBox.Refresh();
-                this.fifthCardPictureBox.Visible = true;
+                this.fifthCardPictureBox.Visible = true;            
             }
 
 
@@ -185,7 +195,20 @@ namespace PokerGame
         {
             this.MoneyTheClientHaveLabel.Text = "Current Money: " +  this.playerMoney.ToString();
             this.allTimeProfitLabel.Text = "All Time Profit: " + this.allTimeProfit.ToString();
-         }
+            if(this.playerIndex == this.dealerIndex)
+            {
+                this.youAreTheDealerLabel.Visible = true;
+            }
+            if (this.playerIndex == this.smallBlindIndex)
+            {
+                
+            }
+            if (this.playerIndex == this.bigBlindIndex)
+            {
+
+            }
+            // visible to number of players -1
+        }
 
         private void valueTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -317,5 +340,6 @@ namespace PokerGame
                 this.countDownTimer.Stop();
             }
         }
+
     }
 }
