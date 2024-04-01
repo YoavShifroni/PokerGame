@@ -39,7 +39,10 @@ namespace PokerGame
             }
             if(clientServerProtocol.command.Equals(Command.UPDATE_BET_MONEY))
             {
-                this.registrationLoginForm.gameBoard.Invoke(new Action(() => this.registrationLoginForm.gameBoard.sumBetMoney(clientServerProtocol.betMoney, clientServerProtocol.username)));
+                this.registrationLoginForm.gameBoard.Invoke(new Action(() => this.registrationLoginForm.gameBoard.sumBetMoney(
+                    clientServerProtocol.betMoney, 
+                    clientServerProtocol.username, 
+                    clientServerProtocol.raiseType)));
             }
             if (clientServerProtocol.command.Equals(Command.YOUR_TURN))
             {

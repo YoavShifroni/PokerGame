@@ -56,8 +56,6 @@ namespace PokerGame
 
         public void MoveToGameBoard(ClientServerProtocol clientServerProtocol)
         {
-            this.waitingRoom.Visible = false;
-            this.gameBoard.Visible = true;
             this.gameBoard.playerMoney = clientServerProtocol.playerMoney;
             this.gameBoard.allTimeProfit = clientServerProtocol.allTimeProfit;
             this.gameBoard.playerIndex = clientServerProtocol.playerIndex;
@@ -65,6 +63,18 @@ namespace PokerGame
             this.gameBoard.smallBlindIndex = clientServerProtocol.smallBlindIndex;
             this.gameBoard.bigBlindIndex = clientServerProtocol.bigBlindIndex;
             this.gameBoard.playersNumber = clientServerProtocol.playersNumber;
+            this.gameBoard.usernamsAndTheirMoney = new List<Tuple<string, int>>();
+            string[] details = clientServerProtocol.allUserDetails.Split(',');
+            for (int i = 0; i < details.Length; i = i + 2)
+            {
+                string username = details[i];
+                int money = Convert.ToInt32(details[i + 1]);
+                this.gameBoard.usernamsAndTheirMoney.Add(Tuple.Create(username, money));
+            }
+
+            this.waitingRoom.Visible = false;
+            this.gameBoard.Visible = true;
+
             this.gameBoard.SetPlayerMoney();
         }
 

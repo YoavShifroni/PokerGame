@@ -62,11 +62,12 @@
             // UsernamesLabel
             // 
             this.UsernamesLabel.BackColor = System.Drawing.Color.Transparent;
+            this.UsernamesLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.UsernamesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UsernamesLabel.ForeColor = System.Drawing.Color.White;
-            this.UsernamesLabel.Location = new System.Drawing.Point(12, 39);
+            this.UsernamesLabel.Location = new System.Drawing.Point(0, 0);
             this.UsernamesLabel.Name = "UsernamesLabel";
-            this.UsernamesLabel.Size = new System.Drawing.Size(458, 704);
+            this.UsernamesLabel.Size = new System.Drawing.Size(458, 881);
             this.UsernamesLabel.TabIndex = 2;
             this.UsernamesLabel.Text = "Connected Players Username:";
             this.UsernamesLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -77,7 +78,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1480, 886);
+            this.ClientSize = new System.Drawing.Size(1444, 881);
             this.Controls.Add(this.UsernamesLabel);
             this.Controls.Add(this.NumberOfConnectedPlayersLabel);
             this.Controls.Add(this.StartButton);

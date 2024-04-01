@@ -41,7 +41,6 @@
             this.thirdCardPictureBox = new System.Windows.Forms.PictureBox();
             this.forthCardPictureBox = new System.Windows.Forms.PictureBox();
             this.fifthCardPictureBox = new System.Windows.Forms.PictureBox();
-            this.deckOfCardsPictureBox = new System.Windows.Forms.PictureBox();
             this.MoneyTheClientHaveLabel = new System.Windows.Forms.Label();
             this.addButton = new System.Windows.Forms.Button();
             this.reduceButton = new System.Windows.Forms.Button();
@@ -54,8 +53,8 @@
             this.totalMoneyLabel = new System.Windows.Forms.Label();
             this.allTimeProfitLabel = new System.Windows.Forms.Label();
             this.countDownTimer = new System.Windows.Forms.Timer(this.components);
-            this.turnTimeLabel = new PokerGame.LabelCircle();
             this.youAreTheDealerLabel = new PokerGame.LabelCircle();
+            this.turnTimeLabel = new PokerGame.LabelCircle();
             ((System.ComponentModel.ISupportInitialize)(this.playerFirstCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playerSecondCardPictureBox)).BeginInit();
@@ -64,7 +63,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.thirdCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.forthCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fifthCardPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deckOfCardsPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // playerFirstCardPictureBox
@@ -145,7 +143,7 @@
             // firstCardPictureBox
             // 
             this.firstCardPictureBox.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.firstCardPictureBox.Location = new System.Drawing.Point(1338, 430);
+            this.firstCardPictureBox.Location = new System.Drawing.Point(1482, 430);
             this.firstCardPictureBox.Name = "firstCardPictureBox";
             this.firstCardPictureBox.Size = new System.Drawing.Size(138, 178);
             this.firstCardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -156,7 +154,7 @@
             // secondCardPictureBox
             // 
             this.secondCardPictureBox.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.secondCardPictureBox.Location = new System.Drawing.Point(1074, 430);
+            this.secondCardPictureBox.Location = new System.Drawing.Point(1227, 430);
             this.secondCardPictureBox.Name = "secondCardPictureBox";
             this.secondCardPictureBox.Size = new System.Drawing.Size(138, 178);
             this.secondCardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -167,7 +165,7 @@
             // thirdCardPictureBox
             // 
             this.thirdCardPictureBox.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.thirdCardPictureBox.Location = new System.Drawing.Point(793, 430);
+            this.thirdCardPictureBox.Location = new System.Drawing.Point(965, 430);
             this.thirdCardPictureBox.Name = "thirdCardPictureBox";
             this.thirdCardPictureBox.Size = new System.Drawing.Size(138, 178);
             this.thirdCardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -178,7 +176,7 @@
             // forthCardPictureBox
             // 
             this.forthCardPictureBox.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.forthCardPictureBox.Location = new System.Drawing.Point(522, 430);
+            this.forthCardPictureBox.Location = new System.Drawing.Point(698, 430);
             this.forthCardPictureBox.Name = "forthCardPictureBox";
             this.forthCardPictureBox.Size = new System.Drawing.Size(138, 178);
             this.forthCardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -189,7 +187,7 @@
             // fifthCardPictureBox
             // 
             this.fifthCardPictureBox.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.fifthCardPictureBox.Location = new System.Drawing.Point(268, 430);
+            this.fifthCardPictureBox.Location = new System.Drawing.Point(433, 430);
             this.fifthCardPictureBox.Name = "fifthCardPictureBox";
             this.fifthCardPictureBox.Size = new System.Drawing.Size(138, 178);
             this.fifthCardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -197,19 +195,9 @@
             this.fifthCardPictureBox.TabStop = false;
             this.fifthCardPictureBox.Visible = false;
             // 
-            // deckOfCardsPictureBox
-            // 
-            this.deckOfCardsPictureBox.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.deckOfCardsPictureBox.Location = new System.Drawing.Point(1622, 430);
-            this.deckOfCardsPictureBox.Name = "deckOfCardsPictureBox";
-            this.deckOfCardsPictureBox.Size = new System.Drawing.Size(138, 178);
-            this.deckOfCardsPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.deckOfCardsPictureBox.TabIndex = 12;
-            this.deckOfCardsPictureBox.TabStop = false;
-            this.deckOfCardsPictureBox.Visible = false;
-            // 
             // MoneyTheClientHaveLabel
             // 
+            this.MoneyTheClientHaveLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.MoneyTheClientHaveLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MoneyTheClientHaveLabel.Location = new System.Drawing.Point(25, 943);
             this.MoneyTheClientHaveLabel.Name = "MoneyTheClientHaveLabel";
@@ -246,6 +234,7 @@
             // 
             // valueTextBox
             // 
+            this.valueTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.valueTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.valueTextBox.Location = new System.Drawing.Point(1858, 981);
             this.valueTextBox.Multiline = true;
@@ -275,7 +264,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.Location = new System.Drawing.Point(640, 269);
+            this.label1.Location = new System.Drawing.Point(634, 301);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(469, 92);
             this.label1.TabIndex = 20;
@@ -285,11 +274,11 @@
             // theWinnerIsLabel
             // 
             this.theWinnerIsLabel.BackColor = System.Drawing.Color.White;
-            this.theWinnerIsLabel.Font = new System.Drawing.Font("David", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.theWinnerIsLabel.Font = new System.Drawing.Font("David", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.theWinnerIsLabel.ForeColor = System.Drawing.Color.Black;
-            this.theWinnerIsLabel.Location = new System.Drawing.Point(674, 9);
+            this.theWinnerIsLabel.Location = new System.Drawing.Point(17, 13);
             this.theWinnerIsLabel.Name = "theWinnerIsLabel";
-            this.theWinnerIsLabel.Size = new System.Drawing.Size(750, 200);
+            this.theWinnerIsLabel.Size = new System.Drawing.Size(467, 171);
             this.theWinnerIsLabel.TabIndex = 23;
             this.theWinnerIsLabel.Text = "And The Winner Is 🥁🥁🥁: ";
             this.theWinnerIsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -311,16 +300,17 @@
             // nameAndBetLabel
             // 
             this.nameAndBetLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameAndBetLabel.Location = new System.Drawing.Point(25, 13);
+            this.nameAndBetLabel.Location = new System.Drawing.Point(12, 301);
             this.nameAndBetLabel.Name = "nameAndBetLabel";
             this.nameAndBetLabel.Size = new System.Drawing.Size(216, 400);
             this.nameAndBetLabel.TabIndex = 25;
             this.nameAndBetLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.nameAndBetLabel.Visible = false;
             // 
             // totalMoneyLabel
             // 
             this.totalMoneyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalMoneyLabel.Location = new System.Drawing.Point(1140, 301);
+            this.totalMoneyLabel.Location = new System.Drawing.Point(1126, 333);
             this.totalMoneyLabel.Name = "totalMoneyLabel";
             this.totalMoneyLabel.Size = new System.Drawing.Size(250, 40);
             this.totalMoneyLabel.TabIndex = 26;
@@ -329,6 +319,7 @@
             // 
             // allTimeProfitLabel
             // 
+            this.allTimeProfitLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.allTimeProfitLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.allTimeProfitLabel.Location = new System.Drawing.Point(25, 1048);
             this.allTimeProfitLabel.Name = "allTimeProfitLabel";
@@ -342,23 +333,12 @@
             this.countDownTimer.Interval = 1000;
             this.countDownTimer.Tick += new System.EventHandler(this.countDownTimer_Tick);
             // 
-            // turnTimeLabel
-            // 
-            this.turnTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.turnTimeLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.turnTimeLabel.Location = new System.Drawing.Point(1889, 149);
-            this.turnTimeLabel.Name = "turnTimeLabel";
-            this.turnTimeLabel.Size = new System.Drawing.Size(164, 123);
-            this.turnTimeLabel.TabIndex = 29;
-            this.turnTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.turnTimeLabel.Visible = false;
-            // 
             // youAreTheDealerLabel
             // 
             this.youAreTheDealerLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.youAreTheDealerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.youAreTheDealerLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.youAreTheDealerLabel.Location = new System.Drawing.Point(1571, 727);
+            this.youAreTheDealerLabel.Location = new System.Drawing.Point(1431, 714);
             this.youAreTheDealerLabel.Name = "youAreTheDealerLabel";
             this.youAreTheDealerLabel.Size = new System.Drawing.Size(177, 157);
             this.youAreTheDealerLabel.TabIndex = 30;
@@ -366,10 +346,23 @@
             this.youAreTheDealerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.youAreTheDealerLabel.Visible = false;
             // 
+            // turnTimeLabel
+            // 
+            this.turnTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.turnTimeLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.turnTimeLabel.Location = new System.Drawing.Point(1906, 129);
+            this.turnTimeLabel.Name = "turnTimeLabel";
+            this.turnTimeLabel.Size = new System.Drawing.Size(164, 123);
+            this.turnTimeLabel.TabIndex = 29;
+            this.turnTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.turnTimeLabel.Visible = false;
+            // 
             // GameBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(2082, 1168);
@@ -386,7 +379,6 @@
             this.Controls.Add(this.reduceButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.MoneyTheClientHaveLabel);
-            this.Controls.Add(this.deckOfCardsPictureBox);
             this.Controls.Add(this.fifthCardPictureBox);
             this.Controls.Add(this.forthCardPictureBox);
             this.Controls.Add(this.thirdCardPictureBox);
@@ -402,6 +394,7 @@
             this.Name = "GameBoard";
             this.Text = "GameBoard";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameBoard_FormClosing);
+            this.Load += new System.EventHandler(this.GameBoard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.playerFirstCardPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playerSecondCardPictureBox)).EndInit();
@@ -410,7 +403,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.thirdCardPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.forthCardPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fifthCardPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deckOfCardsPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -428,7 +420,6 @@
         private System.Windows.Forms.PictureBox thirdCardPictureBox;
         private System.Windows.Forms.PictureBox forthCardPictureBox;
         private System.Windows.Forms.PictureBox fifthCardPictureBox;
-        private System.Windows.Forms.PictureBox deckOfCardsPictureBox;
         private System.Windows.Forms.Label MoneyTheClientHaveLabel;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button reduceButton;

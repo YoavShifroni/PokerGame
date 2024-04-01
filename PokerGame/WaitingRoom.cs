@@ -61,7 +61,27 @@ namespace PokerGame
 
         private void WaitingRoom_Load(object sender, EventArgs e)
         {
+           
+            Rectangle resolutionRect = System.Windows.Forms.Screen.FromControl(this).Bounds;
+            if (this.Width >= resolutionRect.Width || this.Height >= resolutionRect.Height)
+            {
+                double ratio = this.Width / this.Height;
+                int newWidth = (int) (resolutionRect.Width * 0.8);
+                int newHeight = (int) (resolutionRect.Height * 0.8 * ratio);
+                double ratioWidth = (double) newWidth / (double) this.Width;
+                double ratioHeight = (double) newHeight / (double) this.Height;
+                this.Width = newWidth;
+                this.Height = newHeight;
+                foreach (Control control in this.Controls)
+                {
+                    control.Width =  (int) (control.Width * ratioWidth);
+                    control.Height = (int)(control.Height * ratioHeight);
+                    control.Left = (int) (control.Left * ratioWidth);
+                    control.Top = (int) (control.Top * ratioHeight);
+                }
 
+
+            }
         }
 
     }
