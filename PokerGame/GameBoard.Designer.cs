@@ -49,10 +49,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.theWinnerIsLabel = new System.Windows.Forms.Label();
             this.playerTurnLabel = new System.Windows.Forms.Label();
-            this.nameAndBetLabel = new System.Windows.Forms.Label();
             this.totalMoneyLabel = new System.Windows.Forms.Label();
             this.allTimeProfitLabel = new System.Windows.Forms.Label();
             this.countDownTimer = new System.Windows.Forms.Timer(this.components);
+            this.timerForNextGameLabel = new System.Windows.Forms.Label();
+            this.nextGameTimer = new System.Windows.Forms.Timer(this.components);
             this.youAreTheDealerLabel = new PokerGame.LabelCircle();
             this.turnTimeLabel = new PokerGame.LabelCircle();
             ((System.ComponentModel.ISupportInitialize)(this.playerFirstCardPictureBox)).BeginInit();
@@ -297,16 +298,6 @@
             this.playerTurnLabel.Text = "It\'s not your turn right now";
             this.playerTurnLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // nameAndBetLabel
-            // 
-            this.nameAndBetLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameAndBetLabel.Location = new System.Drawing.Point(12, 301);
-            this.nameAndBetLabel.Name = "nameAndBetLabel";
-            this.nameAndBetLabel.Size = new System.Drawing.Size(216, 400);
-            this.nameAndBetLabel.TabIndex = 25;
-            this.nameAndBetLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.nameAndBetLabel.Visible = false;
-            // 
             // totalMoneyLabel
             // 
             this.totalMoneyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -332,6 +323,22 @@
             // 
             this.countDownTimer.Interval = 1000;
             this.countDownTimer.Tick += new System.EventHandler(this.countDownTimer_Tick);
+            // 
+            // timerForNextGameLabel
+            // 
+            this.timerForNextGameLabel.Font = new System.Drawing.Font("Segoe UI Variable Display", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timerForNextGameLabel.Location = new System.Drawing.Point(594, 966);
+            this.timerForNextGameLabel.Name = "timerForNextGameLabel";
+            this.timerForNextGameLabel.Size = new System.Drawing.Size(882, 165);
+            this.timerForNextGameLabel.TabIndex = 31;
+            this.timerForNextGameLabel.Text = "Next Game Will Start In:  ";
+            this.timerForNextGameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.timerForNextGameLabel.Visible = false;
+            // 
+            // nextGameTimer
+            // 
+            this.nextGameTimer.Interval = 1000;
+            this.nextGameTimer.Tick += new System.EventHandler(this.nextGameTimer_Tick);
             // 
             // youAreTheDealerLabel
             // 
@@ -366,11 +373,11 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(2082, 1168);
+            this.Controls.Add(this.timerForNextGameLabel);
             this.Controls.Add(this.youAreTheDealerLabel);
             this.Controls.Add(this.turnTimeLabel);
             this.Controls.Add(this.allTimeProfitLabel);
             this.Controls.Add(this.totalMoneyLabel);
-            this.Controls.Add(this.nameAndBetLabel);
             this.Controls.Add(this.playerTurnLabel);
             this.Controls.Add(this.theWinnerIsLabel);
             this.Controls.Add(this.label1);
@@ -392,6 +399,7 @@
             this.Controls.Add(this.playerFirstCardPictureBox);
             this.DoubleBuffered = true;
             this.Name = "GameBoard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GameBoard";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameBoard_FormClosing);
             this.Load += new System.EventHandler(this.GameBoard_Load);
@@ -428,11 +436,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label theWinnerIsLabel;
         private System.Windows.Forms.Label playerTurnLabel;
-        private System.Windows.Forms.Label nameAndBetLabel;
         private System.Windows.Forms.Label totalMoneyLabel;
         private System.Windows.Forms.Label allTimeProfitLabel;
         private System.Windows.Forms.Timer countDownTimer;
         private LabelCircle turnTimeLabel;
         private LabelCircle youAreTheDealerLabel;
+        private System.Windows.Forms.Label timerForNextGameLabel;
+        private System.Windows.Forms.Timer nextGameTimer;
     }
 }

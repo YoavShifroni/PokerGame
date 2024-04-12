@@ -12,15 +12,13 @@ namespace PokerGame
 {
     public partial class WaitingRoom : Form
     {
-        private RegistrationLoginForm registrationLoginForm;
 
-        public WaitingRoom(RegistrationLoginForm registrationLoginForm)
+        public WaitingRoom()
         {
             InitializeComponent();
-            this.registrationLoginForm = registrationLoginForm;
         }
 
-        private void StartButton_Click(object sender, EventArgs e)
+        public static void StartButton_Click(object sender, EventArgs e)
         {
             ClientServerProtocol clientServerProtocol = new ClientServerProtocol();
             clientServerProtocol.command = Command.START_GAME;
@@ -84,5 +82,6 @@ namespace PokerGame
             }
         }
 
+        
     }
 }

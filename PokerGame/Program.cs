@@ -16,7 +16,8 @@ namespace PokerGame
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RegistrationLoginForm());
+            GameFormsHolder.getInstance();
+            Application.Run(GameFormsHolder.getInstance().loginForm);
         }
     }
 }

@@ -45,7 +45,7 @@
             this.StartButton.TabIndex = 0;
             this.StartButton.Text = "Start Game";
             this.StartButton.UseVisualStyleBackColor = false;
-            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
+            this.StartButton.Click += new System.EventHandler(WaitingRoom.StartButton_Click);
             // 
             // NumberOfConnectedPlayersLabel
             // 
@@ -84,6 +84,7 @@
             this.Controls.Add(this.StartButton);
             this.DoubleBuffered = true;
             this.Name = "WaitingRoom";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WaitingRoom";
             this.Load += new System.EventHandler(this.WaitingRoom_Load);
             this.ResumeLayout(false);

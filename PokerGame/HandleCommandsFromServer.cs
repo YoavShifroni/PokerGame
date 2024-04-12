@@ -8,10 +8,10 @@ namespace PokerGame
 {
     internal class HandleCommandsFromServer
     {
-        private RegistrationLoginForm registrationLoginForm;
-        public HandleCommandsFromServer(RegistrationLoginForm registrationLoginForm) 
+
+        public HandleCommandsFromServer() 
         {
-            this.registrationLoginForm = registrationLoginForm;
+
         }
 
         public void handleCommand(string command)
@@ -19,38 +19,38 @@ namespace PokerGame
             ClientServerProtocol clientServerProtocol = new ClientServerProtocol(command);
             if (clientServerProtocol.command.Equals(Command.OPEN_CARDS))
             {
-                this.registrationLoginForm.gameBoard.Invoke(new Action(() => this.registrationLoginForm.gameBoard.drawCrads(clientServerProtocol.cards)));
+                GameViewManager.getInstance(null).CommandOpenCard(clientServerProtocol.cards);
             }
             if (clientServerProtocol.command.Equals(Command.SUCCES))
             {
-                this.registrationLoginForm.Invoke(new Action(() => this.registrationLoginForm.MoveToWaitingRoom(clientServerProtocol.username)));
+                GameViewManager.getInstance(null).CommandSuccess(clientServerProtocol.username);
             }
             if (clientServerProtocol.command.Equals(Command.USERNAME_OF_CONNECTED_PLAYERS))
             {
-                this.registrationLoginForm.waitingRoom.Invoke(new Action(() => this.registrationLoginForm.waitingRoom.ShowValues(clientServerProtocol.AllUsernames)));
+                GameViewManager.getInstance(null).CommandUsernameOfConnectedPlayers(clientServerProtocol.AllUsernames);
             }
             if (clientServerProtocol.command.Equals(Command.START_GAME))
             {
-                this.registrationLoginForm.Invoke(new Action(() => this.registrationLoginForm.MoveToGameBoard(clientServerProtocol)));
+                GameViewManager.getInstance(null).CommandStartGame(clientServerProtocol);
             }
-            if(clientServerProtocol.command.Equals(Command.SEND_STARTING_CARDS_TO_PLAYER))
+            if (clientServerProtocol.command.Equals(Command.SEND_STARTING_CARDS_TO_PLAYER))
             {
-                this.registrationLoginForm.gameBoard.Invoke(new Action(() => this.registrationLoginForm.gameBoard.DrawPlayerCards(clientServerProtocol.cards)));
+                GameViewManager.getInstance(null).CommandSendCardToPlayers(clientServerProtocol.cards);
             }
             if(clientServerProtocol.command.Equals(Command.UPDATE_BET_MONEY))
             {
-                this.registrationLoginForm.gameBoard.Invoke(new Action(() => this.registrationLoginForm.gameBoard.sumBetMoney(
-                    clientServerProtocol.betMoney, 
-                    clientServerProtocol.username, 
-                    clientServerProtocol.raiseType)));
+                GameViewManager.getInstance(null).CommandUpdateBetMoney(clientServerProtocol.betMoney,
+                    clientServerProtocol.username,
+                    clientServerProtocol.raiseType);
             }
             if (clientServerProtocol.command.Equals(Command.YOUR_TURN))
             {
-                this.registrationLoginForm.gameBoard.Invoke(new Action(() => this.registrationLoginForm.gameBoard.MyTurn(clientServerProtocol.minimumBet)));
+                GameViewManager.getInstance(null).CommandYourTurn(clientServerProtocol.minimumBet);
             }
             if (clientServerProtocol.command.Equals(Command.TELL_EVERYONE_WHO_WON))
             {
-                this.registrationLoginForm.gameBoard.Invoke(new Action(() => this.registrationLoginForm.gameBoard.TheWinnerIs(clientServerProtocol.username)));
+                GameViewManager.getInstance(null).CommandTellEveryOneWhoWon(clientServerProtocol.username
+                    , clientServerProtocol.allPlayersAndCards);
             }
 
 

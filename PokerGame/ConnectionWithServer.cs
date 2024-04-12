@@ -12,18 +12,16 @@ namespace PokerGame
      public class ConnectionWithServer
     {
         private const int portNo = 500;
-        private string serverIpAddress = "127.0.0.1";
         private TcpClient client;
         private byte[] data;
         private HandleCommandsFromServer handleCommandsFromServer;
-        private RegistrationLoginForm registrationLoginForm;
         private static ConnectionWithServer instance = null;
 
-        public static ConnectionWithServer getInstance(string ipAddress, RegistrationLoginForm registrationLoginForm)
+        public static ConnectionWithServer getInstance(string ipAddress)
         {
             if(instance == null)
             {
-                instance = new ConnectionWithServer(ipAddress, registrationLoginForm);
+                instance = new ConnectionWithServer(ipAddress);
             }
             return instance;
         }
@@ -33,11 +31,9 @@ namespace PokerGame
             return instance;
         }
 
-        private ConnectionWithServer(string ipAddress, RegistrationLoginForm registrationLoginForm)
+        private ConnectionWithServer(string ipAddress)
         {
-            this.registrationLoginForm = registrationLoginForm;
-            this.handleCommandsFromServer = new HandleCommandsFromServer(registrationLoginForm);
-            this.serverIpAddress = ipAddress;
+            this.handleCommandsFromServer = new HandleCommandsFromServer();
             client = new TcpClient();
             client.Connect(ipAddress, portNo);
             data = new byte[client.ReceiveBufferSize];
@@ -102,7 +98,9 @@ namespace PokerGame
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 // ignor the error... fired when the user loggs off
+
             }
         }
     }

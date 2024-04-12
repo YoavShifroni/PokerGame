@@ -63,20 +63,28 @@
   <ItemGroup>
     <Compile Include="ClientServerProtocol.cs" />
     <Compile Include="ConnectionWithServer.cs" />
+    <Compile Include="GameFormsHolder.cs" />
+    <Compile Include="GameViewManager.cs" />
+    <Compile Include="RegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegisterForm.Designer.cs">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="HandleCommandsFromServer.cs" />
     <Compile Include="LabelCircle.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="RegistrationLoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RegistrationLoginForm.Designer.cs">
-      <DependentUpon>RegistrationLoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GameBoard.cs">
       <SubType>Form</SubType>
@@ -92,8 +100,11 @@
     <Compile Include="WaitingRoom.Designer.cs">
       <DependentUpon>WaitingRoom.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RegistrationLoginForm.resx">
-      <DependentUpon>RegistrationLoginForm.cs</DependentUpon>
+    <EmbeddedResource Include="RegisterForm.resx">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameBoard.resx">
       <DependentUpon>GameBoard.cs</DependentUpon>
