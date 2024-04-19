@@ -68,7 +68,7 @@ namespace PokerGame
 
         private bool isFilled()
         {
-            if (usernameTextBox.Text.Length <= 1)
+            if (usernameTextBox.Text.Length <= 3)
             {
                 MessageBox.Show("fix name, Registration Failed");
                 return false;

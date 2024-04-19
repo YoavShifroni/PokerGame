@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PokerGame
@@ -13,7 +14,13 @@ namespace PokerGame
         private ConnectionWithServer connectionWithServer;
 
         private static GameViewManager instance = null;
-
+        
+        
+        public static void Destroy()
+        {
+            GameViewManager.instance = null;
+            ConnectionWithServer.Destroy();
+        }
         public static GameViewManager getInstance(string ipAddress)
         {
             if(GameViewManager.instance != null)
@@ -51,6 +58,15 @@ namespace PokerGame
             this.connectionWithServer.SendMessage(message.generate());
         }
 
+        public void ProcessForgotPassword(string username)
+        {
+            ClientServerProtocol message = new ClientServerProtocol();
+            message.command = Command.FORGOT_PASSWORD;
+            message.username = username;
+            this.connectionWithServer.SendMessage(message.generate());
+        }
+
+
         private GameViewManager(string ipAddress) {
             this.connectionWithServer = ConnectionWithServer.getInstance(ipAddress);
         }
@@ -67,8 +83,7 @@ namespace PokerGame
         {
             GameFormsHolder.getInstance().gameBoard.playerMoney = clientServerProtocol.playerMoney;
             GameFormsHolder.getInstance().gameBoard.allTimeProfit = clientServerProtocol.allTimeProfit;
-            GameFormsHolder.getInstance().gameBoard.playerIndex = clientServerProtocol.playerIndex;
-            GameFormsHolder.getInstance().gameBoard.dealerIndex = clientServerProtocol.dealerIndex;
+            GameFormsHolder.getInstance().gameBoard.dealerUsername = clientServerProtocol.dealerName;
             GameFormsHolder.getInstance().gameBoard.smallBlindUsername = clientServerProtocol.smallBlindUsername;
             GameFormsHolder.getInstance().gameBoard.bigBlindUsername = clientServerProtocol.bigBlindUsername;
             GameFormsHolder.getInstance().gameBoard.playersNumber = clientServerProtocol.playersNumber;
@@ -84,6 +99,7 @@ namespace PokerGame
             GameFormsHolder.getInstance().waitingRoom.Visible = false;
             GameFormsHolder.getInstance().gameBoard.Visible = true;
             GameFormsHolder.getInstance().gameBoard.SetPlayerMoney();
+            GameFormsHolder.getInstance().gameBoard.CreatePicturesForPlayers();
         }
 
         public void CommandOpenCard(string[] cards)
@@ -122,9 +138,21 @@ namespace PokerGame
             GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.MyTurn(minimumBet)));
         }
 
-        public void CommandTellEveryOneWhoWon(string username, string allPlayerAndCards)
+        public void CommandTellEveryOneWhoWon(string username, string allPlayerAndCards, string oneWinnerName)
         {
-            GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.TheWinnerIs(username, allPlayerAndCards)));
+            GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.TheWinnerIs(username, allPlayerAndCards, oneWinnerName)));
+        }
+
+        public void CommandNotifyTurn(string username)
+        {
+            GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.NotifyTurn(username)));
+
+        }
+
+        public void StopGame()
+        {
+            MessageBox.Show("you are out of money. bye bye");
+            GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.GameBoard_FormClosing(null,null)));
         }
     }
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PokerGame
 {
-    internal class HandleCommandsFromServer
+    public class HandleCommandsFromServer
     {
 
         public HandleCommandsFromServer() 
@@ -16,6 +17,7 @@ namespace PokerGame
 
         public void handleCommand(string command)
         {
+            Console.WriteLine(command);
             ClientServerProtocol clientServerProtocol = new ClientServerProtocol(command);
             if (clientServerProtocol.command.Equals(Command.OPEN_CARDS))
             {
@@ -47,10 +49,18 @@ namespace PokerGame
             {
                 GameViewManager.getInstance(null).CommandYourTurn(clientServerProtocol.minimumBet);
             }
+            if (clientServerProtocol.command.Equals(Command.NOTIFY_TURN))
+            {
+                GameViewManager.getInstance(null).CommandNotifyTurn(clientServerProtocol.username);
+            }
             if (clientServerProtocol.command.Equals(Command.TELL_EVERYONE_WHO_WON))
             {
                 GameViewManager.getInstance(null).CommandTellEveryOneWhoWon(clientServerProtocol.username
-                    , clientServerProtocol.allPlayersAndCards);
+                    , clientServerProtocol.allPlayersAndCards, clientServerProtocol.oneWinnerName);
+            }
+            if (clientServerProtocol.command.Equals(Command.ERROR))
+            {
+                MessageBox.Show(clientServerProtocol.message);
             }
 
 

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PokerGame
 {
@@ -12,16 +14,17 @@ namespace PokerGame
         private bool isDargging = false;
         private bool firstRound = true;
         private bool gameIsOver = false;
+        private bool fold = false;
         private int totalBetMoney = 0;
         public int playerMoney;
         public int allTimeProfit;
         private int seconds;
         public string username = "";
         public int minimumBet;
-        public int playerIndex;
-        public int dealerIndex;
+        public string dealerUsername;
         public string smallBlindUsername;
         public string bigBlindUsername;
+        public string oneWinnerName;
         public int playersNumber;
         public List<Tuple<string, int>> usernamsAndTheirMoney;
         private List<Tuple<Point, Point>>[] points;
@@ -33,7 +36,7 @@ namespace PokerGame
         }
 
 
-        private void GameBoard_FormClosing(object sender, FormClosingEventArgs e)
+        public void GameBoard_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Visible = false;
             GameFormsHolder.getInstance().loginForm.Visible = true;
@@ -75,6 +78,7 @@ namespace PokerGame
 
         private void foldButton_Click(object sender, EventArgs e)
         {
+            this.fold = true;
             ClientServerProtocol clientServerProtocol = new ClientServerProtocol();
             clientServerProtocol.command = Command.FOLD;
             ConnectionWithServer.getOpenInstance().SendMessage(clientServerProtocol.generate());
@@ -210,8 +214,9 @@ namespace PokerGame
         {
             this.MoneyTheClientHaveLabel.Text = "Current Money: " + this.playerMoney.ToString();
             this.allTimeProfitLabel.Text = "All Time Profit: " + this.allTimeProfit.ToString();
+            this.myNameLabel.Text = "Name: " + this.username;
 
-            if (this.playerIndex == this.dealerIndex)
+            if (this.username.Equals(this.dealerUsername))
             {
                 this.youAreTheDealerLabel.Visible = true;
             }
@@ -299,21 +304,11 @@ namespace PokerGame
             }
             else
             {
-                string name = "";
-                foreach (Control control in Controls)
+                string userId = this.GetLabelId(username);
+                if(userId == null)
                 {
-                    if (control is Label)
-                    {
-                        Label lbl = (Label)control;
-                        if (lbl.Text.Equals(username))
-                        {
-                            name = lbl.Name;
-                            break;
-                        }
-
-                    }
+                    return;
                 }
-                string userId = name.Substring(name.Length - 1);
                 string nameOfActionLabel = "showAction_" + userId;
                 string nameOfMoneyLabel = "showMoney_" + userId;
                 ((Label)this.Controls.Find(nameOfActionLabel, true)[0]).Visible = true;
@@ -336,8 +331,47 @@ namespace PokerGame
             }
         }
 
+        private string GetLabelId(string username)
+        {
+            string name = null;
+            foreach (Control control in Controls)
+            {
+                if (control is Label)
+                {
+                    Label lbl = (Label)control;
+                    string labelText = lbl.Text;
+                    if (labelText.Length > 3)
+                    {
+                        if(labelText.EndsWith("  D"))
+                        {
+                            labelText = labelText.Substring(0, labelText.Length - 3);
+                        }
+                        if (labelText.Equals(username))
+                        {
+                            name = lbl.Name;
+                            break;
+                        }
+                    }
+
+
+                }
+            }
+            if(name == null)
+            {
+                return null;
+            }
+            string userId = name.Substring(name.Length - 1);
+
+            return userId;
+        }
+
         public void MyTurn(int minimumBet)
         {
+            if(this.playerMoney == 0 && this.fold == false)
+            {
+                this.checkButton_Click(null, null);
+                return;
+            }
             this.playerTurnLabel.Text = "Now it's your turn";
             this.playerTurnLabel.BackColor = Color.Green;
             if (this.username.Equals(this.smallBlindUsername) && this.firstRound)
@@ -385,33 +419,42 @@ namespace PokerGame
             this.turnTimeLabel.Text = "";
         }
 
-        public void TheWinnerIs(string username, string allPlayerAndCards)
+
+        public void NotifyTurn(string username)
         {
-            gameIsOver = true;
+            string userId = this.GetLabelId(username);
+            if (userId == null)
+            {
+                return;
+            }
+            string ActionLabel = "showAction_" + userId;
+            Label userActionLabel = ((Label)this.Controls.Find(ActionLabel, true)[0]);
+            userActionLabel.Font = new Font(userActionLabel.Font, FontStyle.Bold);
+            userActionLabel.Text = "• • •";
+            //userActionLabel.Text = ". . .";
+            userActionLabel.Visible = true;
+        }
+
+
+        public void TheWinnerIs(string username, string allPlayerAndCards, string oneWinnerName)
+        {
+            this.oneWinnerName = oneWinnerName;
+            this.gameIsOver = true;
             string[] picturesAndNames = allPlayerAndCards.Split(',');
             for (int i = 0; i < picturesAndNames.Length - 2;)
             {
                 string playerName = picturesAndNames[i];
+                if (playerName.Equals(this.username))
+                {
+                    i = i + 3;
+                    continue;
+                }
                 string card1 = picturesAndNames[i + 1];
                 string card2 = picturesAndNames[i + 2];
                 i = i + 3;
-                string name = null;
-                foreach (Control control in Controls)
+                string userId = this.GetLabelId(playerName);
+                if (userId != null)
                 {
-                    if (control is Label)
-                    {
-                        Label lbl = (Label)control;
-                        if (lbl.Text.Equals(playerName))
-                        {
-                            name = lbl.Name;
-                            break;
-                        }
-
-                    }
-                }
-                if (name != null)
-                {
-                    string userId = name.Substring(name.Length - 1);
                     string pictureBox1 = "playerCard_" + userId;
                     string pictureBox2 = "playerCard2_" + userId;
                     string labelMoney = "showMoney_" + userId;
@@ -435,19 +478,25 @@ namespace PokerGame
                         new System.Drawing.Point(x + 55, ((Label)this.Controls.Find(labelname, true)[0]).Top + 20);
                     ((Label)this.Controls.Find(labelMoney, true)[0]).Visible = false;
                     ((Label)this.Controls.Find(labelAction, true)[0]).Visible = false;
-                    if (this.playersNumber == 2) // in case of two players, if we don't do this is looks weird
+                    if (this.playersNumber == 2 || this.playersNumber == 4 || this.playersNumber == 6) // in case of two or four or six players, if we don't do this is looks weird
                     {
-
-                        ((PictureBox)this.Controls.Find(pictureBox1, true)[0]).Location =
+                        if(((PictureBox)this.Controls.Find(pictureBox1, true)[0]).Left == 969)
+                        {
+                            ((PictureBox)this.Controls.Find(pictureBox1, true)[0]).Location =
                             new System.Drawing.Point(((PictureBox)this.Controls.Find(pictureBox1, true)[0]).Left - 97,
                             ((PictureBox)this.Controls.Find(pictureBox1, true)[0]).Top);
-                        ((PictureBox)this.Controls.Find(pictureBox2, true)[0]).Location =
-                             new System.Drawing.Point(((PictureBox)this.Controls.Find(pictureBox2, true)[0]).Left - 97,
-                             ((PictureBox)this.Controls.Find(pictureBox2, true)[0]).Top);
-                        ((Label)this.Controls.Find(labelname, true)[0]).Location =
-                            new System.Drawing.Point(x - 27, ((Label)this.Controls.Find(labelname, true)[0]).Top + 20);
-
+                            ((PictureBox)this.Controls.Find(pictureBox2, true)[0]).Location =
+                                 new System.Drawing.Point(((PictureBox)this.Controls.Find(pictureBox2, true)[0]).Left - 97,
+                                 ((PictureBox)this.Controls.Find(pictureBox2, true)[0]).Top);
+                            ((Label)this.Controls.Find(labelname, true)[0]).Location =
+                                new System.Drawing.Point(x - 27, ((Label)this.Controls.Find(labelname, true)[0]).Top + 20);
+                        }
                     }
+                    
+                }
+                else
+                {
+                    Console.WriteLine("Stom:" + userId + ", " + this.username  + ":" + allPlayerAndCards + "  i=" + i + " playername: " + playerName);
                 }
 
 
@@ -460,9 +509,8 @@ namespace PokerGame
             this.countDownTimer.Stop();
             this.nextGameTimer.Start();
 
-
-
         }
+
 
         private void countDownTimer_Tick(object sender, EventArgs e)
         {
@@ -475,6 +523,7 @@ namespace PokerGame
             }
         }
 
+
         private void nextGameTimer_Tick(object sender, EventArgs e)
         {
             this.timerForNextGameLabel.Text = "Next Game Will Start In: " + this.seconds.ToString();
@@ -485,18 +534,30 @@ namespace PokerGame
             }
             this.seconds--;
         }
+        
+
+        //public void AppendText(RichTextBox box, string text, Color color)
+        //{
+        //    box.SelectionStart = box.TextLength;
+        //    box.SelectionLength = 0;
+
+        //    box.SelectionColor = color;
+        //    box.AppendText(text);
+        //    box.SelectionColor = box.ForeColor;
+        //}
 
         public void RestartGame()
         {
-            if (this.dealerIndex == this.playerIndex)
+            if (this.username.Equals(this.oneWinnerName))
             {
                 WaitingRoom.StartButton_Click(null, null);
             }
-            clickedForTheSecondTime = false;
-            isDargging = false;
-            firstRound = true;
-            gameIsOver = false;
-            totalBetMoney = 0;
+            this.clickedForTheSecondTime = false;
+            this.isDargging = false;
+            this.firstRound = true;
+            this.gameIsOver = false;
+            this.totalBetMoney = 0;
+            this.fold = false;
             this.timerForNextGameLabel.Visible = false;
             this.theWinnerIsLabel.Visible = false;
             this.playerFirstCardPictureBox.Image = null;
@@ -511,7 +572,10 @@ namespace PokerGame
             this.thirdCardPictureBox.Visible = false;
             this.forthCardPictureBox.Visible = false;
             this.fifthCardPictureBox.Visible = false;
-            this.CreatePicturesForPlayers();
+            this.youAreTheDealerLabel.Visible = false;
+            this.raiseButton.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.foldButton.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.checkButton.BackColor = System.Drawing.SystemColors.ButtonShadow;
 
         }
 
@@ -525,45 +589,54 @@ namespace PokerGame
             this.points[0].Add(Tuple.Create(new Point(969, 13), new Point(1152, 13)));
             this.points[1].Add(Tuple.Create(new Point(215, 232), new Point(32, 232)));
             this.points[1].Add((Tuple.Create(new Point(1720, 232), new Point(1903, 232))));
-            this.points[2].Add(Tuple.Create(new Point(969, 13), new Point(1152, 13)));
             this.points[2].Add(Tuple.Create(new Point(215, 232), new Point(32, 232)));
+            this.points[2].Add(Tuple.Create(new Point(969, 13), new Point(1152, 13)));
             this.points[2].Add(Tuple.Create(new Point(1720, 232), new Point(1903, 232)));
             this.points[3].Add(Tuple.Create(new Point(215, 232), new Point(32, 232)));
-            this.points[3].Add(Tuple.Create(new Point(1720, 232), new Point(1903, 232)));
-            this.points[3].Add(Tuple.Create(new Point(1335, 25), new Point(1518, 25)));
             this.points[3].Add(Tuple.Create(new Point(613, 25), new Point(796, 25)));
-            this.points[4].Add(Tuple.Create(new Point(969, 13), new Point(152, 13)));
-            this.points[4].Add(Tuple.Create(new Point(1720, 232), new Point(1903, 232)));
-            this.points[4].Add(Tuple.Create(new Point(215, 232), new Point(32, 232)));
-            this.points[4].Add(Tuple.Create(new Point(1720, 576), new Point(1903, 576)));
+            this.points[3].Add(Tuple.Create(new Point(1335, 25), new Point(1518, 25)));
+            this.points[3].Add(Tuple.Create(new Point(1720, 232), new Point(1903, 232)));
             this.points[4].Add(Tuple.Create(new Point(215, 576), new Point(32, 576)));
-            this.points[5].Add(Tuple.Create(new Point(1720, 232), new Point(1903, 232)));
-            this.points[5].Add(Tuple.Create(new Point(215, 232), new Point(32, 232)));
-            this.points[5].Add(Tuple.Create(new Point(1720, 576), new Point(1903, 576)));
+            this.points[4].Add(Tuple.Create(new Point(215, 232), new Point(32, 232)));
+            this.points[4].Add(Tuple.Create(new Point(969, 13), new Point(1152, 13)));
+            this.points[4].Add(Tuple.Create(new Point(1720, 232), new Point(1903, 232)));
+            this.points[4].Add(Tuple.Create(new Point(1720, 576), new Point(1903, 576)));
             this.points[5].Add(Tuple.Create(new Point(215, 576), new Point(32, 576)));
-            this.points[5].Add(Tuple.Create(new Point(1335, 25), new Point(1518, 25)));
+            this.points[5].Add(Tuple.Create(new Point(215, 232), new Point(32, 232)));
             this.points[5].Add(Tuple.Create(new Point(613, 25), new Point(796, 25)));
-            this.points[6].Add(Tuple.Create(new Point(1720, 232), new Point(1903, 232)));
-            this.points[6].Add(Tuple.Create(new Point(215, 232), new Point(32, 232)));
-            this.points[6].Add(Tuple.Create(new Point(1720, 576), new Point(1903, 576)));
+            this.points[5].Add(Tuple.Create(new Point(1335, 25), new Point(1518, 25)));
+            this.points[5].Add(Tuple.Create(new Point(1720, 232), new Point(1903, 232)));
+            this.points[5].Add(Tuple.Create(new Point(1720, 576), new Point(1903, 576)));
             this.points[6].Add(Tuple.Create(new Point(215, 576), new Point(32, 576)));
-            this.points[6].Add(Tuple.Create(new Point(1335, 25), new Point(1518, 25)));
+            this.points[6].Add(Tuple.Create(new Point(215, 232), new Point(32, 232)));
             this.points[6].Add(Tuple.Create(new Point(613, 25), new Point(430, 25)));
             this.points[6].Add(Tuple.Create(new Point(906, 25), new Point(1089, 25)));
+            this.points[6].Add(Tuple.Create(new Point(1335, 25), new Point(1518, 25)));
+            this.points[6].Add(Tuple.Create(new Point(1720, 232), new Point(1903, 232)));
+            this.points[6].Add(Tuple.Create(new Point(1720, 576), new Point(1903, 576)));
 
         }
 
-        private void CreatePicturesForPlayers()
+        public void CreatePicturesForPlayers()
         {
             this.initiliazeMainPictureBoxLocation();
             int index = 1;
+            for(int i=1; i< 8; ++i)
+            {
+                RemoveComponentIfExist("playerCard_" + i);
+                RemoveComponentIfExist("playerCard2_" + i);
+                RemoveComponentIfExist("showMoney_" + i);
+                RemoveComponentIfExist("showName_" + i);
+                RemoveComponentIfExist("showAction_" + i);
+            }
+
+
             for (int i = 0; i < this.playersNumber - 1; i++)
             {
                 Point mainLocation = this.points[this.playersNumber - 2].ElementAt(i).Item1;
                 Point secondLocation = this.points[this.playersNumber - 2].ElementAt(i).Item2;
 
                 PictureBox playerCard = new PictureBox();
-                RemoveComponentIfExist("playerCard_" + index.ToString());
                 playerCard.Name = "playerCard_" + index.ToString();
                 ((System.ComponentModel.ISupportInitialize)(playerCard)).BeginInit();
                 playerCard.Size = new System.Drawing.Size(140, 180);
@@ -576,7 +649,6 @@ namespace PokerGame
 
 
                 PictureBox playerCard2 = new PictureBox();
-                RemoveComponentIfExist("playerCard2_" + index.ToString());
                 playerCard2.Name = "playerCard2_" + index.ToString();
                 ((System.ComponentModel.ISupportInitialize)(playerCard2)).BeginInit();
                 playerCard2.Size = new System.Drawing.Size(140, 180);
@@ -588,7 +660,6 @@ namespace PokerGame
 
 
                 Label showMoney = new Label();
-                RemoveComponentIfExist("showMoney_" + index.ToString());
                 showMoney.Name = "showMoney_" + index.ToString();
                 showMoney.Font = new System.Drawing.Font
                     ("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -600,42 +671,33 @@ namespace PokerGame
 
 
                 Label showName = new Label();
-                RemoveComponentIfExist("showName_" + index.ToString());
                 showName.Name = "showName_" + index.ToString();
                 showName.Font = new System.Drawing.Font
                     ("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 showName.Size = new System.Drawing.Size(187, 45);
                 showName.Location = new System.Drawing.Point(mainLocation.X - 24, mainLocation.Y + 172);
-                showName.Text = this.usernamsAndTheirMoney.ElementAt(i).Item1;
+                if (this.dealerUsername.Equals(this.usernamsAndTheirMoney.ElementAt(i).Item1))
+                {
+                    showName.Text = this.usernamsAndTheirMoney.ElementAt(i).Item1 + "  D";
+                }
+                else
+                {
+                    showName.Text = this.usernamsAndTheirMoney.ElementAt(i).Item1;
+                }
                 showName.TextAlign = ContentAlignment.MiddleCenter;
                 this.Controls.Add(showName);
 
 
                 Label showAction = new Label();
-                RemoveComponentIfExist("showAction_" + index.ToString());
                 showAction.Name = "showAction_" + index.ToString();
                 showAction.Font = new System.Drawing.Font
                     ("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 showAction.Size = new System.Drawing.Size(187, 40);
                 showAction.Location = new System.Drawing.Point(mainLocation.X - 24, mainLocation.Y + 232);
                 showAction.Visible = false;
-                if (this.smallBlindUsername.Equals(this.usernamsAndTheirMoney.ElementAt(i).Item1))
-                {
-                    showAction.Text = "small blind";
-                    showAction.Visible = true;
-                }
-                else if (this.bigBlindUsername.Equals(this.usernamsAndTheirMoney.ElementAt(i).Item1))
-                {
-                    showAction.Text = "big blind";
-                    showAction.Visible = true;
-                }
-                else
-                {
-                    showAction.Text = "";
-                }
+                showAction.Text = "";
                 showAction.TextAlign = ContentAlignment.MiddleCenter;
                 this.Controls.Add(showAction);
-
                 showMoney.BringToFront();
                 showName.BringToFront();
                 index++;
@@ -657,7 +719,6 @@ namespace PokerGame
 
         private void GameBoard_Load(object sender, EventArgs e)
         {
-            this.CreatePicturesForPlayers();
             Rectangle resolutionRect = System.Windows.Forms.Screen.FromControl(this).Bounds;
             if (this.Width >= resolutionRect.Width || this.Height >= resolutionRect.Height)
             {
@@ -682,7 +743,7 @@ namespace PokerGame
             }
         }
 
-
+        
     }
 
 }

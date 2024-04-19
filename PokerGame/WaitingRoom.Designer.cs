@@ -83,6 +83,7 @@
             this.Controls.Add(this.NumberOfConnectedPlayersLabel);
             this.Controls.Add(this.StartButton);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "WaitingRoom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WaitingRoom";

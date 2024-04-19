@@ -54,6 +54,7 @@
             this.countDownTimer = new System.Windows.Forms.Timer(this.components);
             this.timerForNextGameLabel = new System.Windows.Forms.Label();
             this.nextGameTimer = new System.Windows.Forms.Timer(this.components);
+            this.myNameLabel = new System.Windows.Forms.Label();
             this.youAreTheDealerLabel = new PokerGame.LabelCircle();
             this.turnTimeLabel = new PokerGame.LabelCircle();
             ((System.ComponentModel.ISupportInitialize)(this.playerFirstCardPictureBox)).BeginInit();
@@ -202,7 +203,7 @@
             this.MoneyTheClientHaveLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MoneyTheClientHaveLabel.Location = new System.Drawing.Point(25, 943);
             this.MoneyTheClientHaveLabel.Name = "MoneyTheClientHaveLabel";
-            this.MoneyTheClientHaveLabel.Size = new System.Drawing.Size(423, 72);
+            this.MoneyTheClientHaveLabel.Size = new System.Drawing.Size(423, 59);
             this.MoneyTheClientHaveLabel.TabIndex = 13;
             this.MoneyTheClientHaveLabel.Text = "Current Money: ";
             this.MoneyTheClientHaveLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -277,7 +278,7 @@
             this.theWinnerIsLabel.BackColor = System.Drawing.Color.White;
             this.theWinnerIsLabel.Font = new System.Drawing.Font("David", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.theWinnerIsLabel.ForeColor = System.Drawing.Color.Black;
-            this.theWinnerIsLabel.Location = new System.Drawing.Point(17, 13);
+            this.theWinnerIsLabel.Location = new System.Drawing.Point(3, 9);
             this.theWinnerIsLabel.Name = "theWinnerIsLabel";
             this.theWinnerIsLabel.Size = new System.Drawing.Size(467, 171);
             this.theWinnerIsLabel.TabIndex = 23;
@@ -312,9 +313,9 @@
             // 
             this.allTimeProfitLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.allTimeProfitLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.allTimeProfitLabel.Location = new System.Drawing.Point(25, 1048);
+            this.allTimeProfitLabel.Location = new System.Drawing.Point(25, 1022);
             this.allTimeProfitLabel.Name = "allTimeProfitLabel";
-            this.allTimeProfitLabel.Size = new System.Drawing.Size(423, 72);
+            this.allTimeProfitLabel.Size = new System.Drawing.Size(423, 59);
             this.allTimeProfitLabel.TabIndex = 27;
             this.allTimeProfitLabel.Text = "All time profit: ";
             this.allTimeProfitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -339,6 +340,17 @@
             // 
             this.nextGameTimer.Interval = 1000;
             this.nextGameTimer.Tick += new System.EventHandler(this.nextGameTimer_Tick);
+            // 
+            // myNameLabel
+            // 
+            this.myNameLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.myNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.myNameLabel.Location = new System.Drawing.Point(25, 1100);
+            this.myNameLabel.Name = "myNameLabel";
+            this.myNameLabel.Size = new System.Drawing.Size(423, 59);
+            this.myNameLabel.TabIndex = 32;
+            this.myNameLabel.Text = "Name:";
+            this.myNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // youAreTheDealerLabel
             // 
@@ -373,6 +385,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(2082, 1168);
+            this.Controls.Add(this.myNameLabel);
             this.Controls.Add(this.timerForNextGameLabel);
             this.Controls.Add(this.youAreTheDealerLabel);
             this.Controls.Add(this.turnTimeLabel);
@@ -398,6 +411,7 @@
             this.Controls.Add(this.raiseButton);
             this.Controls.Add(this.playerFirstCardPictureBox);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "GameBoard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GameBoard";
@@ -443,5 +457,6 @@
         private LabelCircle youAreTheDealerLabel;
         private System.Windows.Forms.Label timerForNextGameLabel;
         private System.Windows.Forms.Timer nextGameTimer;
+        private System.Windows.Forms.Label myNameLabel;
     }
 }

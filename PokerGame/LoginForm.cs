@@ -64,7 +64,21 @@ namespace PokerGame
             this.Visible = false;
         }
 
-        
-        
+        private void changePasswordLabel_Click(object sender, EventArgs e)
+        {
+            if(usernameTextBox.Text.Length <= 1)
+            {
+                MessageBox.Show("please fill your username first");
+                return;
+            }
+            GameViewManager.getInstance(serverIpTextBox.Text).ProcessForgotPassword(usernameTextBox.Text);
+            MessageBox.Show("email with a new password was sent to you right now, check your email and login");
+
+        }
+
+        private void passwordTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -10,12 +10,18 @@ using System.Windows.Forms;
 namespace PokerGame
 {
      public class ConnectionWithServer
-    {
+     {
         private const int portNo = 500;
         private TcpClient client;
         private byte[] data;
         private HandleCommandsFromServer handleCommandsFromServer;
         private static ConnectionWithServer instance = null;
+
+
+        public static void Destroy()
+        {
+            ConnectionWithServer.instance = null;
+        }
 
         public static ConnectionWithServer getInstance(string ipAddress)
         {
@@ -74,6 +80,7 @@ namespace PokerGame
                 if (bytesRead < 1)
                 {
                     MessageBox.Show("You are disconnected");
+                    GameViewManager.getInstance(null).StopGame();
                     return;
                 }
                 else
@@ -103,5 +110,7 @@ namespace PokerGame
 
             }
         }
+
+       
     }
 }
