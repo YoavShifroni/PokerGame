@@ -35,13 +35,27 @@ namespace PokerGame
             InitializeComponent();
         }
 
-
+        /// <summary>
+        /// this function called when someone is closing the GameBoardForm, when someone is closing the GameBoardForm 
+        /// it will open the login form again
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void GameBoard_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Visible = false;
             GameFormsHolder.getInstance().loginForm.Visible = true;
+            this.nextGameTimer.Stop();
+            this.countDownTimer.Stop();
         }
 
+        /// <summary>
+        /// when someone click the raise button this function will show him the labels, textBox and Button that with them 
+        /// he will decide on how much money he want to bet and if he clicked it for the second time it will hide him
+        /// the labels, textBox and Button that with them he bet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void raiseButton_Click(object sender, EventArgs e)
         {
             if (clickedForTheSecondTime)
@@ -65,17 +79,25 @@ namespace PokerGame
             this.trackBar1.Maximum = this.playerMoney;
         }
 
+        /// <summary>
+        /// when someone click the check button this function will send to the server the Command CHECK
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkButton_Click(object sender, EventArgs e)
         {
             ClientServerProtocol clientServerProtocol = new ClientServerProtocol();
             clientServerProtocol.command = Command.CHECK;
             ConnectionWithServer.getOpenInstance().SendMessage(clientServerProtocol.generate());
             this.AfterMyTurn();
-
         }
 
 
-
+        /// <summary>
+        /// when someone click the fold button this function will send to the server the Command FOLD and change the bool "fold" to be true
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void foldButton_Click(object sender, EventArgs e)
         {
             this.fold = true;
@@ -91,6 +113,10 @@ namespace PokerGame
 
         }
 
+        /// <summary>
+        /// this function draw the community cards 
+        /// </summary>
+        /// <param name="cards"></param>
         public void drawCrads(string[] cards)
         {
             if (cards[0] != null && cards[0].Length > 0)
@@ -148,6 +174,10 @@ namespace PokerGame
 
         }
 
+        /// <summary>
+        /// this function draw the player cards
+        /// </summary>
+        /// <param name="cards"></param>
         public void DrawPlayerCards(string[] cards)
         {
             this.playerFirstCardPictureBox.Image = (Image)Properties.Resources.ResourceManager.GetObject(cards[0]);
@@ -159,7 +189,12 @@ namespace PokerGame
         }
 
 
-
+        /// <summary>
+        /// this function called when someone dragging the track bar, the function will show the value of the track bar on the textBox
+        /// that show the money that the user want to bet on
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
             if (isDargging)
@@ -168,16 +203,32 @@ namespace PokerGame
             }
         }
 
+        /// <summary>
+        /// when someone stop dragging the track bar this function is called and will change the bool "isDragging" to false
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void trackBar1_MouseUp(object sender, MouseEventArgs e)
         {
             isDargging = false;
         }
 
+        /// <summary>
+        /// when someone start dragging the track bar this function is called and will change the bool "isDragging" to true
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void trackBar1_MouseDown(object sender, MouseEventArgs e)
         {
             isDargging = true;
         }
 
+        /// <summary>
+        /// when someone click the addButton this function is called and will add 10 to the textBox that show on how much money
+        /// the user want to bet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
             int valueOfLabel = Convert.ToInt32(this.valueTextBox.Text);
@@ -193,6 +244,13 @@ namespace PokerGame
             }
             this.valueTextBox.Text = valueOfLabel.ToString();
         }
+
+        /// <summary>
+        /// when someone click the reduceButton this function is called and will reduce 10 to the textBox that show on how much money
+        /// the user want to bet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void reduceButton_Click(object sender, EventArgs e)
         {
             int valueOfLabel = Convert.ToInt32(this.valueTextBox.Text);
@@ -210,6 +268,7 @@ namespace PokerGame
 
         }
 
+        
         public void SetPlayerMoney()
         {
             this.MoneyTheClientHaveLabel.Text = "Current Money: " + this.playerMoney.ToString();
@@ -518,7 +577,7 @@ namespace PokerGame
             this.turnTimeLabel.Text = this.seconds--.ToString();
             if (this.seconds < 0 && !gameIsOver)
             {
-                this.foldButton_Click(null, null);
+                //this.foldButton_Click(null, null);
                 this.countDownTimer.Stop();
             }
         }

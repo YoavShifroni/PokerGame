@@ -62,6 +62,10 @@ namespace PokerGame
             {
                 MessageBox.Show(clientServerProtocol.message);
             }
+            if (clientServerProtocol.command.Equals(Command.FINAL_WINNER))
+            {
+                GameViewManager.getInstance(null).CommandFinalWinner();
+            }
 
 
         }

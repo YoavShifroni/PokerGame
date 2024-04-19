@@ -18,6 +18,12 @@ namespace PokerGame
             InitializeComponent();
         }
 
+        /// <summary>
+        /// when someone click the login button this function check if the feilds for the logins are fill corectly and if there are fill
+        /// corectly the functiuon send to the server the information to check if the user is in the system 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void loginButton_Click(object sender, EventArgs e)
         {
             string checkIp = this.serverIpTextBox.Text;
@@ -37,6 +43,11 @@ namespace PokerGame
             }
         }
 
+        /// <summary>
+        /// when someone click the clear button the function clear all fields
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void clearButton_Click(object sender, EventArgs e)
         {
             this.usernameTextBox.Text = "";
@@ -46,6 +57,11 @@ namespace PokerGame
             
         }
 
+        /// <summary>
+        /// when someone click the showPassword checkBox it shows/ hide the password text box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void showPasswordCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if(showPasswordCheckBox.Checked)
@@ -58,12 +74,23 @@ namespace PokerGame
             }
         }
 
-        private void backToLoginLabel_Click(object sender, EventArgs e)
+        /// <summary>
+        /// if someone click the goToRegister label this function will send him to the Register form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void goToRegister_Click(object sender, EventArgs e)
         {
             GameFormsHolder.getInstance().registerForm.Visible = true;
             this.Visible = false;
         }
 
+        /// <summary>
+        /// if someone click the changePasswordLabel this function will send to the server the Command that will tell him 
+        /// to send to this client email his new password
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void changePasswordLabel_Click(object sender, EventArgs e)
         {
             if(usernameTextBox.Text.Length <= 1)
@@ -76,9 +103,5 @@ namespace PokerGame
 
         }
 
-        private void passwordTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

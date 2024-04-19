@@ -153,6 +153,14 @@ namespace PokerGame
         {
             MessageBox.Show("you are out of money. bye bye");
             GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.GameBoard_FormClosing(null,null)));
+            GameViewManager.Destroy();
+        }
+
+        public void CommandFinalWinner()
+        {
+            MessageBox.Show("you are the final winner congratulations, you can login to the game again if you want to");
+            GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.GameBoard_FormClosing(null, null)));
+            GameViewManager.Destroy();
         }
     }
 }

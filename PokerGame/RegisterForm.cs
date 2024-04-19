@@ -20,6 +20,13 @@ namespace PokerGame
             InitializeComponent();
         }
 
+        /// <summary>
+        /// when someone click the registration button this function check if the feilds for the register are fill corectly 
+        /// and if there are fill corectly the functiuon send to the server the information to check if the user is in the system 
+        /// and if he isn't it will add him to the system
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void registerButton_Click(object sender, EventArgs e)
         {
             string checkIp = this.serverIpTextBox.Text;
@@ -45,8 +52,12 @@ namespace PokerGame
             }
         }
 
-       
 
+        /// <summary>
+        /// when someone click the clear button the function clear all fields
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void clearButton_Click(object sender, EventArgs e)
         {
             this.usernameTextBox.Text = "";
@@ -60,12 +71,21 @@ namespace PokerGame
 
         }
 
+        /// <summary>
+        /// if someone click the backToLoginLabel this function will send him to the Login form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backToLoginLabel_Click(object sender, EventArgs e)
         {
             GameFormsHolder.getInstance().loginForm.Visible = true;
             this.Visible = false;
         }
 
+        /// <summary>
+        /// this function check if all the fields for the register are fill corectly
+        /// </summary>
+        /// <returns></returns>
         private bool isFilled()
         {
             if (usernameTextBox.Text.Length <= 3)
@@ -106,7 +126,13 @@ namespace PokerGame
             }
             return true;
         }
-
+        
+        /// <summary>
+        /// this function check if the string email that it get is a correct email, if it is the function will return true 
+        /// otherwise the function will return false
+        /// </summary>
+        /// <param name="emailaddress"></param>
+        /// <returns></returns>
         private bool IsValidEmail(string emailaddress)
         {
             try
@@ -120,6 +146,12 @@ namespace PokerGame
             }
         }
 
+        /// <summary>
+        /// this function check if the string password that it get is a correct password using Regex, if it is the function will return true 
+        /// otherwise the function will return false
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
         private bool IsValidPassword(string password)
         {
             string s = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$";
@@ -132,6 +164,11 @@ namespace PokerGame
 
         }
 
+        /// <summary>
+        /// when someone click the showPassword checkBox it shows/ hide the password text box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void showPasswordCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (showPasswordCheckBox.Checked)

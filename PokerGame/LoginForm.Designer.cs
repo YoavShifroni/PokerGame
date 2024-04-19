@@ -37,7 +37,7 @@
             this.dontHaveAnAccountLabel = new System.Windows.Forms.Label();
             this.clearButton = new System.Windows.Forms.Button();
             this.loginButton = new System.Windows.Forms.Button();
-            this.backToLoginLabel = new System.Windows.Forms.Label();
+            this.goToRegisterLabel = new System.Windows.Forms.Label();
             this.serverIpTextBox = new System.Windows.Forms.TextBox();
             this.serverIpLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,7 +57,6 @@
             this.passwordTextBox.TabIndex = 9;
             this.passwordTextBox.Text = "Yh123!";
             this.passwordTextBox.WordWrap = false;
-            this.passwordTextBox.TextChanged += new System.EventHandler(this.passwordTextBox_TextChanged);
             // 
             // passwordLabel
             // 
@@ -152,16 +151,16 @@
             this.loginButton.UseVisualStyleBackColor = false;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
-            // backToLoginLabel
+            // goToRegisterLabel
             // 
-            this.backToLoginLabel.AutoSize = true;
-            this.backToLoginLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(86)))), ((int)(((byte)(174)))));
-            this.backToLoginLabel.Location = new System.Drawing.Point(96, 541);
-            this.backToLoginLabel.Name = "backToLoginLabel";
-            this.backToLoginLabel.Size = new System.Drawing.Size(76, 17);
-            this.backToLoginLabel.TabIndex = 23;
-            this.backToLoginLabel.Text = "Create One";
-            this.backToLoginLabel.Click += new System.EventHandler(this.backToLoginLabel_Click);
+            this.goToRegisterLabel.AutoSize = true;
+            this.goToRegisterLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(86)))), ((int)(((byte)(174)))));
+            this.goToRegisterLabel.Location = new System.Drawing.Point(96, 541);
+            this.goToRegisterLabel.Name = "goToRegisterLabel";
+            this.goToRegisterLabel.Size = new System.Drawing.Size(76, 17);
+            this.goToRegisterLabel.TabIndex = 23;
+            this.goToRegisterLabel.Text = "Create One";
+            this.goToRegisterLabel.Click += new System.EventHandler(this.goToRegister_Click);
             // 
             // serverIpTextBox
             // 
@@ -214,7 +213,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.serverIpTextBox);
             this.Controls.Add(this.serverIpLabel);
-            this.Controls.Add(this.backToLoginLabel);
+            this.Controls.Add(this.goToRegisterLabel);
             this.Controls.Add(this.dontHaveAnAccountLabel);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.loginButton);
@@ -247,7 +246,7 @@
         private System.Windows.Forms.Label dontHaveAnAccountLabel;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button loginButton;
-        private System.Windows.Forms.Label backToLoginLabel;
+        private System.Windows.Forms.Label goToRegisterLabel;
         private System.Windows.Forms.TextBox serverIpTextBox;
         private System.Windows.Forms.Label serverIpLabel;
         private System.Windows.Forms.Label label1;
