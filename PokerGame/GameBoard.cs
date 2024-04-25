@@ -38,7 +38,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// this function called when someone is closing the GameBoardForm, when someone is closing the GameBoardForm 
+        /// this function called when someone is closing the GameBoardForm - 
         /// it will open the login form again
         /// </summary>
         /// <param name="sender"></param>
@@ -52,9 +52,9 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// when someone click the raise button this function will show him the labels, textBox and Button that with them 
-        /// he will decide on how much money he want to bet and if he clicked it for the second time it will hide him
-        /// the labels, textBox and Button that with them he bet
+        /// when someone click the raise button this function will show them the labels, textBox and Button that with them. 
+        /// They will decide on how much money they want to bet and if they clicked it for the second time, it will hide 
+        /// the labels, textBox and Button that with them they made the bet
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -83,6 +83,7 @@ namespace PokerGame
 
         /// <summary>
         /// when someone click the check button this function will send to the server the Command CHECK
+        /// https://www.poker.org/poker-strategy/poker-for-beginners/what-does-check-mean-in-poker-aeGq13H9UyyM/
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -97,6 +98,7 @@ namespace PokerGame
 
         /// <summary>
         /// when someone click the fold button this function will send to the server the Command FOLD and change the bool "fold" to be true
+        /// https://www.poker.org/poker-strategy/poker-for-beginners/what-does-fold-mean-in-poker-acKas4s2Dr6A/
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -116,7 +118,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// this function draw the community cards 
+        /// this function draws the community cards 
         /// </summary>
         /// <param name="cards"></param>
         public void drawCrads(string[] cards)
@@ -177,7 +179,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// this function draw the player cards
+        /// this function draws the player cards
         /// </summary>
         /// <param name="cards"></param>
         public void DrawPlayerCards(string[] cards)
@@ -192,8 +194,8 @@ namespace PokerGame
 
 
         /// <summary>
-        /// this function called when someone dragging the track bar, the function will show the value of the track bar on the textBox
-        /// that show the money that the user want to bet on
+        /// this function called when someone dragging the money track bar, the function will show the value of the track bar on the textBox
+        /// that show the money that the user wants to bet on
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -227,7 +229,7 @@ namespace PokerGame
 
         /// <summary>
         /// when someone click the addButton this function is called and will add 10 to the textBox that show on how much money
-        /// the user want to bet
+        /// the user wants to bet
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -249,7 +251,7 @@ namespace PokerGame
 
         /// <summary>
         /// when someone click the reduceButton this function is called and will reduce 10 to the textBox that show on how much money
-        /// the user want to bet
+        /// the user wants to bet
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -287,8 +289,8 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// the function check that when someone change the text in the valueTextBox that he fill it with
-        /// only numbers and that he didn't put negetive number or number that he don't have
+        /// the function check that when someone change the text in the valueTextBox that they fill it with
+        /// only numbers and that they didn't put in negetive number or number that they don't have
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -337,7 +339,7 @@ namespace PokerGame
 
         /// <summary>
         /// when someone click the bet button this function will send to the server
-        /// the Command RAISE
+        /// the Command RAISE, to increase their bet
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -367,13 +369,13 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// the function is called after someone finish their turn and will change if it's nececry
+        /// the function is called after someone finishes their turn and will change if it's necessary
         /// the amount of money that is on the table and will write in the action label
         /// the raise type that the player did
         /// </summary>
-        /// <param name="betMoney"></param>
-        /// <param name="username"></param>
-        /// <param name="raiseType"></param>
+        /// <param name="betMoney">moeny to bet</param>
+        /// <param name="username">the username</param>
+        /// <param name="raiseType">Type of raise</param>
         public void sumBetMoney(int betMoney, string username, string raiseType)
         {
             this.totalBetMoney += betMoney;
@@ -413,11 +415,11 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// the function check what is the number that apper in labelName that show the
+        /// the function check what is the number that appears in labelName that shows the
         /// name of the username that the function get and will string that contain
         /// the number at the end of the labelName (id)
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="username">the username</param>
         /// <returns></returns>
         private string GetLabelId(string username)
         { 
@@ -454,10 +456,10 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// the function is called when it's someone turn and will change all the things that
-        /// the player need so he could play
+        /// the function is called when it's someone turns and will change all the things that
+        /// the player need so they could play
         /// </summary>
-        /// <param name="minimumBet"></param>
+        /// <param name="minimumBet">the minimal bet</param>
         public void MyTurn(int minimumBet)
         {
             if(this.playerMoney == 0 && this.fold == false)
@@ -495,7 +497,7 @@ namespace PokerGame
         }
         /// <summary>
         /// the function is called when someone finish their turn and will change all the things that
-        /// needed so the player couldn't play
+        /// needed so the player couldn't play until it is their turn again
         /// </summary>
         private void AfterMyTurn()
         {
@@ -517,10 +519,10 @@ namespace PokerGame
 
         
         /// <summary>
-        /// the function show to the other players that it's not their turn now who turn it is
+        /// the function shows to the other players that it's not their turn now who turn it is
         /// by write in is actionLabel three points - ". . ."
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="username">the username</param>
         public void NotifyTurn(string username)
         {
             string userId = this.GetLabelId(username);
@@ -540,9 +542,9 @@ namespace PokerGame
         /// <summary>
         /// the function handle the gameboard when there is a winner
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="allPlayerAndCards"></param>
-        /// <param name="oneWinnerName"></param>
+        /// <param name="username">the username</param>
+        /// <param name="allPlayerAndCards">all the cards of all the players</param>
+        /// <param name="oneWinnerName">the winner's name</param>
         public void TheWinnerIs(string username, string allPlayerAndCards, string oneWinnerName)
         {
             this.oneWinnerName = oneWinnerName;
@@ -695,6 +697,7 @@ namespace PokerGame
         /// <summary>
         /// the function create array of List that contain Tuple with two values of Points
         /// and will give the array the values that needed
+        /// We are using fixed locations to allow between 2 to 8 players in the game and make the view as nice as possible
         /// </summary>
         private void initiliazeMainPictureBoxLocation()
         {
@@ -735,8 +738,8 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// the function is called when the game is about to bagin and will genercly create
-        /// some pictureBoxes and lebels that will show all the players that are connected
+        /// the function is called when the game is about to begin and creates
+        /// some pictureBoxes and labels that will show all the players that are connected (all players on the board)
         /// </summary>
         public void CreatePicturesForPlayers()
         {
@@ -829,9 +832,9 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// the function will remove the control if he is already exist
+        /// the function will remove the control if he is already exist, by its name
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">The name of the component</param>
         private void RemoveComponentIfExist(string name)
         {
             Control[] componentToRemove = this.Controls.Find(name, true);
@@ -843,9 +846,9 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// the function is called when the game board is firt load and will check if the board
-        /// is fit for the screen of the user and if it isn't the function will
-        /// reduce the size of the game board and his controls
+        /// the function is called when the game board is firt loaded and will check if the board
+        /// fits the screen size of the user and if it doesn't the function will
+        /// reduce the size of the game board and its controls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -870,12 +873,7 @@ namespace PokerGame
                     float fontSize = (float)(control.Font.Size * 0.7);
                     control.Font = new Font(control.Font.Name, fontSize);
                 }
-
-
             }
         }
-
-        
     }
-
 }

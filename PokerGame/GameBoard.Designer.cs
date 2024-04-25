@@ -280,7 +280,7 @@
             this.theWinnerIsLabel.ForeColor = System.Drawing.Color.Black;
             this.theWinnerIsLabel.Location = new System.Drawing.Point(3, 9);
             this.theWinnerIsLabel.Name = "theWinnerIsLabel";
-            this.theWinnerIsLabel.Size = new System.Drawing.Size(467, 171);
+            this.theWinnerIsLabel.Size = new System.Drawing.Size(462, 156);
             this.theWinnerIsLabel.TabIndex = 23;
             this.theWinnerIsLabel.Text = "And The Winner Is 🥁🥁🥁: ";
             this.theWinnerIsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

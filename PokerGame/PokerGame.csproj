@@ -63,6 +63,12 @@
   <ItemGroup>
     <Compile Include="ClientServerProtocol.cs" />
     <Compile Include="ConnectionWithServer.cs" />
+    <Compile Include="ForgotPasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ForgotPasswordForm.Designer.cs">
+      <DependentUpon>ForgotPasswordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameFormsHolder.cs" />
     <Compile Include="GameViewManager.cs" />
     <Compile Include="RegisterForm.cs">
@@ -100,6 +106,9 @@
     <Compile Include="WaitingRoom.Designer.cs">
       <DependentUpon>WaitingRoom.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ForgotPasswordForm.resx">
+      <DependentUpon>ForgotPasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>

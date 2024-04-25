@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace PokerGame
 {
+    /// <summary>
+    /// This function received the string (command) from the server, parse it and calls the right function to handle
+    /// it, according to the received command
+    /// </summary>
     public class HandleCommandsFromServer
     {
 
@@ -16,10 +20,10 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// when the client recive some new message frrom the server this function is called and
-        /// check what is the Command that recived from the message and call to the right function
+        /// when the client receives a new message from the server this function is called and
+        /// check what is the Command that received from the message and call to the right function
         /// </summary>
-        /// <param name="command"></param>
+        /// <param name="command">The command (as string) that was received from the server</param>
         public void handleCommand(string command)
         {
             Console.WriteLine(command);

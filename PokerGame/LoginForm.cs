@@ -22,7 +22,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// when someone click the login button this function check if the feilds for the logins are fill corectly and if there are fill
+        /// when someone clicks the login button this function check if the feilds for the logins are fill corectly and if there are fill
         /// corectly the functiuon send to the server the information to check if the user is in the system 
         /// </summary>
         /// <param name="sender"></param>
@@ -47,7 +47,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// when someone click the clear button the function clear all fields
+        /// when someone clicks the clear button the function clear all fields
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -61,7 +61,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// when someone click the showPassword checkBox it shows/ hide the password text box
+        /// when someone clicks the showPassword checkBox it shows/ hide the password text box
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -78,7 +78,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// if someone click the goToRegister label this function will send him to the Register form
+        /// if someone clicks the goToRegister label this function will send him to the Register form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -89,7 +89,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// if someone click the changePasswordLabel this function will send to the server the Command that will tell him 
+        /// if someone clicks the changePasswordLabel this function will send to the server the Command that will tell him 
         /// to send to this client email his new password
         /// </summary>
         /// <param name="sender"></param>
@@ -102,9 +102,10 @@ namespace PokerGame
                 return;
             }
             GameViewManager.getInstance(serverIpTextBox.Text).ProcessForgotPassword(usernameTextBox.Text);
-            MessageBox.Show("email with a new password was sent to you right now, check your email and login");
+            MessageBox.Show("email with code was sent to you right now, check your email and enter the code in the right place");
+            GameFormsHolder.getInstance().forgotPasswordForm.Visible = true;
+            this.Visible = false;
 
         }
-
     }
 }

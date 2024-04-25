@@ -24,7 +24,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// when someone click the registration button this function check if the feilds for the register are fill corectly 
+        /// when someone clicks the registration button this function check if the feilds for the register are fill corectly 
         /// and if there are fill corectly the functiuon send to the server the information to check if the user is in the system 
         /// and if he isn't it will add him to the system
         /// </summary>
@@ -57,7 +57,7 @@ namespace PokerGame
 
 
         /// <summary>
-        /// when someone click the clear button the function clear all fields
+        /// when someone clicks the clear button the function clear all fields
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -75,7 +75,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// if someone click the backToLoginLabel this function will send him to the Login form
+        /// if someone clicks the backToLoginLabel this function will send him to the Login form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -86,9 +86,9 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// this function check if all the fields for the register are fill corectly
+        /// this function checks if all the fields for the register are filled corectly
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if all fields are correct</returns>
         private bool isFilled()
         {
             if (usernameTextBox.Text.Length <= 3)
@@ -131,10 +131,10 @@ namespace PokerGame
         }
         
         /// <summary>
-        /// this function check if the string email that it get is a correct email, if it is the function will return true 
+        /// this function checks if the string email that it get is a correct email, if it is the function will return true 
         /// otherwise the function will return false
         /// </summary>
-        /// <param name="emailaddress"></param>
+        /// <param name="emailaddress">The email address</param>
         /// <returns></returns>
         private bool IsValidEmail(string emailaddress)
         {
@@ -153,9 +153,9 @@ namespace PokerGame
         /// this function check if the string password that it get is a correct password using Regex, if it is the function will return true 
         /// otherwise the function will return false
         /// </summary>
-        /// <param name="password"></param>
+        /// <param name="password">The password to validate</param>
         /// <returns></returns>
-        private bool IsValidPassword(string password)
+        public static bool IsValidPassword(string password)
         {
             string s = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$";
             Regex regex = new Regex(s);
@@ -168,7 +168,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// when someone click the showPassword checkBox it shows/ hide the password text box
+        /// when someone clicks the showPassword checkBox it shows/ hide the password text box
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

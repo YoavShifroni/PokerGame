@@ -9,19 +9,33 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PokerGame
 {
+    /// <summary>
+    /// This class manages the game - passes the view from one form to another and handles all commands from the server
+    /// </summary>
     public class GameViewManager
     {
-        private ConnectionWithServer connectionWithServer;
+        public ConnectionWithServer connectionWithServer;
+        public string code;
+        public string username;
 
         private static GameViewManager instance = null;
         
-        
+        /// <summary>
+        /// Destroy the instance when we're done playing
+        /// </summary>
         public static void Destroy()
         {
             GameViewManager.instance = null;
             ConnectionWithServer.Destroy();
         }
 
+        /// <summary>
+        /// Singleton pattern - we need a single instance of this class as it creates a TCP connection with the server and 
+        /// each client needs to hold only 1 TCP connection
+        /// </summary>
+        /// <param name="ipAddress">IP address of the server</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static GameViewManager getInstance(string ipAddress)
         {
             if(GameViewManager.instance != null)
@@ -40,8 +54,8 @@ namespace PokerGame
         /// the function is called when the player clicked the login button and will send to the server
         /// the Command LOGIN with the right parameters
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="username">The username</param>
+        /// <param name="password">The password</param>
         public void ProcessLogin(string username, string password)
         {
             ClientServerProtocol message = new ClientServerProtocol();
@@ -55,13 +69,13 @@ namespace PokerGame
         /// the function is called when the player clicked the register button and will send to the server
         /// the Command REGISTER with the right parameters
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="email"></param>
-        /// <param name="city"></param>
-        /// <param name="gender"></param>
+        /// <param name="username">The new username</param>
+        /// <param name="password">The new password</param>
+        /// <param name="firstName">The new First name</param>
+        /// <param name="lastName">The new Last name</param>
+        /// <param name="email">The new email address</param>
+        /// <param name="city">The new city</param>
+        /// <param name="gender">The new gender</param>
         public void ProcessRegister(string username, string password, string firstName, string lastName, string email, string city, string gender)
         {
             ClientServerProtocol message = new ClientServerProtocol();
@@ -80,28 +94,47 @@ namespace PokerGame
         /// the function is called when the player clicked the forgotPasswordButton button and will send
         /// to the server the Command FORGOT_PASSWORD with the right parameters
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="username">Username that forget their password</param>
         public void ProcessForgotPassword(string username)
         {
+            this.code = this.randomCode();
+            this.username = username;
             ClientServerProtocol message = new ClientServerProtocol();
             message.command = Command.FORGOT_PASSWORD;
             message.username = username;
+            message.code = this.code;
             this.connectionWithServer.SendMessage(message.generate());
         }
 
         /// <summary>
-        /// the constructor create the connection with the server
+        /// the function return random password (code) that contains at least one capital letter
+        /// , one small letter, one digit and one specific sign
         /// </summary>
-        /// <param name="ipAddress"></param>
+        /// <returns>The random code to verify with the user</returns>
+        public string randomCode()
+        {
+            var charsALL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz#?!@$%^&*-";
+            var randomIns = new Random();
+            var rndChars = Enumerable.Range(0, 6)
+                            .Select(_ => charsALL[randomIns.Next(charsALL.Length)])
+                            .ToArray();
+            return new string(rndChars);
+        }
+
+
+        /// <summary>
+        /// the private constructor create the connection with the server
+        /// </summary>
+        /// <param name="ipAddress">The IP address of the server</param>
         private GameViewManager(string ipAddress) {
             this.connectionWithServer = ConnectionWithServer.getInstance(ipAddress);
         }
 
         /// <summary>
-        /// the function is called when someone succesfly login/ register and will move him
+        /// the function is called when someone succesfly login/ register and will move them
         /// to the WaitingRoom form
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="username">The username</param>
         public void MoveToWaitingRoom(string username)
         {
             GameFormsHolder.getInstance().loginForm.Visible = false;
@@ -111,10 +144,10 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// the function is called when someone succesfly press the StartButton and will move the client
+        /// the function is called when someone successfuly press the StartButton and will move the client
         /// to the GameBoard form and fill the nececery information for the player
         /// </summary>
-        /// <param name="clientServerProtocol"></param>
+        /// <param name="clientServerProtocol">The ClientServerProtocol received from the server</param>
         public void MoveToGameBoard(ClientServerProtocol clientServerProtocol)
         {
             GameFormsHolder.getInstance().gameBoard.playerMoney = clientServerProtocol.playerMoney;
@@ -139,62 +172,62 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// the function is called when the client recive from the server the Command OPEN_CARDS
+        /// the function is called when the client receives from the server the Command OPEN_CARDS
         /// and will call the function drawCards
         /// </summary>
-        /// <param name="cards"></param>
+        /// <param name="cards">The cards to show</param>
         public void CommandOpenCard(string[] cards)
         {
             GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.drawCrads(cards)));
         }
 
         /// <summary>
-        /// the function is called when the client recive from the server the Command SUCCESS
+        /// the function is called when the client receives from the server the Command SUCCESS
         /// and will call the function MoveToWaitingRoom
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="username">The username</param>
         public void CommandSuccess(string username)
         {
            GameFormsHolder.getInstance().loginForm.Invoke(new Action(() => this.MoveToWaitingRoom(username)));
         }
 
         /// <summary>
-        /// the function is called when the client recive from the server the Command
+        /// the function is called when the client receives from the server the Command
         /// USERNAME_OF_CONNECTED_PLAYERS, and will call the function ShowValues
         /// </summary>
-        /// <param name="AllUsernames"></param>
+        /// <param name="AllUsernames">All the usernames that are playing</param>
         public void CommandUsernameOfConnectedPlayers(string AllUsernames)
         {
             GameFormsHolder.getInstance().waitingRoom.Invoke(new Action(() => GameFormsHolder.getInstance().waitingRoom.ShowValues(AllUsernames)));  
         }
 
         /// <summary>
-        /// the function is called when the client recive from the server the Command START_GAME
+        /// the function is called when the client receives from the server the Command START_GAME
         /// and will call the function MoveToGameBoard
         /// </summary>
-        /// <param name="clientServerProtocol"></param>
+        /// <param name="clientServerProtocol">The ClientServerProtocol received from the server</param>
         public void CommandStartGame(ClientServerProtocol clientServerProtocol)
         {
             GameFormsHolder.getInstance().loginForm.Invoke(new Action(() => this.MoveToGameBoard(clientServerProtocol)));
         }
 
         /// <summary>
-        /// the function is called when the client recive from the server the Command
+        /// the function is called when the client receives from the server the Command
         /// SEND_STARTING_CARD_TO_PLAYER, and will call the function DrawPlayerCards
         /// </summary>
-        /// <param name="cards"></param>
+        /// <param name="cards">The cards that the user has</param>
         public void CommandSendCardToPlayers(string[] cards)
         {
             GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.DrawPlayerCards(cards)));
         }
 
         /// <summary>
-        /// the function is called when the client recive from the server the Command
+        /// the function is called when the client receives from the server the Command
         /// UPDATE_BET_MONEY, and will call the function sumBetMoney
         /// </summary>
-        /// <param name="betMoney"></param>
-        /// <param name="username"></param>
-        /// <param name="raiseType"></param>
+        /// <param name="betMoney">The new bet money</param>
+        /// <param name="username">The username that made that bet</param>
+        /// <param name="raiseType">The type of that raise that the user did</param>
         public void CommandUpdateBetMoney(int betMoney, string username, string raiseType)
         {
             GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.sumBetMoney(
@@ -202,32 +235,32 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// the function is called when the client recive from the server the Command YOUR_TURN
+        /// the function is called when the client receives from the server the Command YOUR_TURN
         /// and will call the function MyTurn
         /// </summary>
-        /// <param name="minimumBet"></param>
+        /// <param name="minimumBet">The minimal bet value</param>
         public void CommandYourTurn(int minimumBet)
         {
             GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.MyTurn(minimumBet)));
         }
 
         /// <summary>
-        /// the function is called when the client recive from the server the Command
+        /// the function is called when the client receives from the server the Command
         /// TELL_EVERYONE_WHO_WON, and will call the function TheWinnerIs
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="allPlayerAndCards"></param>
-        /// <param name="oneWinnerName"></param>
+        /// <param name="username">The username</param>
+        /// <param name="allPlayerAndCards">All users with their cards</param>
+        /// <param name="oneWinnerName">The username of the winner</param>
         public void CommandTellEveryOneWhoWon(string username, string allPlayerAndCards, string oneWinnerName)
         {
             GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.TheWinnerIs(username, allPlayerAndCards, oneWinnerName)));
         }
 
         /// <summary>
-        /// the function is called when the client recive from the server the Command NOTIFY_TURN,
+        /// the function is called when the client receives from the server the Command NOTIFY_TURN,
         /// and will call the function NotifyTurn
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="username">The username</param>
         public void CommandNotifyTurn(string username)
         {
             GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.NotifyTurn(username)));

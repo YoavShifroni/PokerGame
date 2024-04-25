@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace PokerGame
 {
+    /// <summary>
+    /// Enumeration of the different commands we're using in the client<->server protocol
+    /// </summary>
     public enum Command
     {
         REGISTRATION,
         LOGIN,
         ERROR,
         FORGOT_PASSWORD,
+        UPDATE_PASSWORD,
         OPEN_CARDS,
         RAISE,
         CHECK,
@@ -26,7 +30,11 @@ namespace PokerGame
         TELL_EVERYONE_WHO_WON,
         FINAL_WINNER,
     };
-
+    /// <summary>
+    /// This class represents the protocol between the server and the client
+    /// it has the Command field and according to its value - we're sending and receiving
+    /// fields of information
+    /// </summary>
     public class ClientServerProtocol
     {
         public string username { get; set; }
@@ -70,6 +78,9 @@ namespace PokerGame
 
         public string oneWinnerName { get; set; }
 
+        public string code {  get; set; }
+
+        public string newPassword {  get; set; }
 
         /// <summary>
         /// 
@@ -81,7 +92,7 @@ namespace PokerGame
 
 
         /// <summary>
-        /// 
+        /// This function generates the ClientServerProtocol instance from the string we're sending over TCP
         /// </summary>
         /// <param name="message"></param>
         public ClientServerProtocol(string message)
@@ -110,6 +121,11 @@ namespace PokerGame
                     break;
                 case Command.FORGOT_PASSWORD:
                     this.username += answer[1];
+                    this.code += answer[2];
+                    break;
+                case Command.UPDATE_PASSWORD:
+                    this.username += answer[1];
+                    this.newPassword = answer[2];
                     break;
                 case Command.SEND_STARTING_CARDS_TO_PLAYER:
                 case Command.OPEN_CARDS:
@@ -160,7 +176,8 @@ namespace PokerGame
 
 
         /// <summary>
-        /// 
+        /// This function generates the string of the protocol that we're sending over TCP
+        /// from the fields of the class, based on the command
         /// </summary>
         /// <returns></returns>
         public string generate()
@@ -186,6 +203,11 @@ namespace PokerGame
                     break;
                 case Command.FORGOT_PASSWORD:
                     answer += username + "\n";
+                    answer += code + "\n";
+                    break;
+                case Command.UPDATE_PASSWORD:
+                    answer += username + "\n";
+                    answer += newPassword + "\n";
                     break;
                 case Command.SEND_STARTING_CARDS_TO_PLAYER:
                 case Command.OPEN_CARDS:
@@ -241,15 +263,5 @@ namespace PokerGame
         {
             this.cards[index] = card;
         }
-
-
-
-
-
-
-
-
-
-
     }
 }

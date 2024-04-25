@@ -17,12 +17,18 @@ namespace PokerGame
         private HandleCommandsFromServer handleCommandsFromServer;
         private static ConnectionWithServer instance = null;
 
-
+        /// <summary>
+        /// This function cleans up the class by removing the static instance
+        /// </summary>
         public static void Destroy()
         {
             ConnectionWithServer.instance = null;
         }
-
+        /// <summary>
+        /// SingleTon pattern - we need to have only 1 instance of this class in the client
+        /// </summary>
+        /// <param name="ipAddress">The IP address of the server</param>
+        /// <returns></returns>
         public static ConnectionWithServer getInstance(string ipAddress)
         {
             if(instance == null)
@@ -31,12 +37,18 @@ namespace PokerGame
             }
             return instance;
         }
-
+        /// <summary>
+        /// This function returns the instance of the connection to the server, only if it was already created 
+        /// </summary>
+        /// <returns></returns>
         public static ConnectionWithServer getOpenInstance()
         {
             return instance;
         }
-
+        /// <summary>
+        /// Private constructor of the class, as per Singleton pattern
+        /// </summary>
+        /// <param name="ipAddress"></param>
         private ConnectionWithServer(string ipAddress)
         {
             this.handleCommandsFromServer = new HandleCommandsFromServer();
@@ -49,7 +61,10 @@ namespace PokerGame
                                                  ReceiveMessage,
                                                  null);
         }
-
+        /// <summary>
+        /// This function sends a message (string) to the server
+        /// </summary>
+        /// <param name="message"></param>
         public void SendMessage(string message)
         {
             try
@@ -67,7 +82,11 @@ namespace PokerGame
                 MessageBox.Show(ex.ToString());
             }
         }
-
+        /// <summary>
+        /// This function is the endless loop of reading messages that the server sends to the client
+        /// In case the TCP connection is disconnected, it will show a message box with an error
+        /// </summary>
+        /// <param name="ar"></param>
         private void ReceiveMessage(IAsyncResult ar)
         {
             try
@@ -106,11 +125,9 @@ namespace PokerGame
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                // ignor the error... fired when the user loggs off
+                // ignore the error... fired when the user loggs off
 
             }
         }
-
-       
     }
 }

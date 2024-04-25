@@ -22,7 +22,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// when someone click the StartButton or someone call this function, the function send to the server the command StartGame
+        /// when someone clicks the StartButton or someone call this function, the function send to the server the command StartGame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -36,9 +36,9 @@ namespace PokerGame
         /// <summary>
         /// this function add to the UsernamesLabel the usernames of all the connected players and change the number that
         /// the NumberOfConnectedPlayersLabel show to the number of connected players that are right now in the Waiting room.
-        /// the function also change the Enable of the StartButton to be true only if there are bettwen 2 to 8 connected player 
+        /// the function also change the Enable of the StartButton to be true only if there are between 2 to 8 connected player 
         /// </summary>
-        /// <param name="connectedUsernames"></param>
+        /// <param name="connectedUsernames">The usernames that are connected to the game</param>
         public void ShowValues(string connectedUsernames)
         {
             string[] answer = connectedUsernames.Split(',');
@@ -72,7 +72,7 @@ namespace PokerGame
         }
 
         /// <summary>
-        /// this function change the size of the WaitingRoom Form if the resolution of your screen is to small to show all 
+        /// this function changes the size of the WaitingRoom Form if the resolution of your screen is to small to show all 
         /// the WaitingRoom form
         /// </summary>
         /// <param name="sender"></param>
