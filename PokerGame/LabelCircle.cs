@@ -9,7 +9,12 @@ using System.Windows.Forms;
 namespace PokerGame
 {
     class LabelCircle : Label
+
     {
+        /// <summary>
+        /// the function create a new Control that is a circle label and add him to the ToolBox
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
             GraphicsPath graphics = new GraphicsPath();

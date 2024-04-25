@@ -12,14 +12,19 @@ namespace PokerGame
 
         public HandleCommandsFromServer() 
         {
-
+            
         }
 
+        /// <summary>
+        /// when the client recive some new message frrom the server this function is called and
+        /// check what is the Command that recived from the message and call to the right function
+        /// </summary>
+        /// <param name="command"></param>
         public void handleCommand(string command)
         {
             Console.WriteLine(command);
             ClientServerProtocol clientServerProtocol = new ClientServerProtocol(command);
-            if (clientServerProtocol.command.Equals(Command.OPEN_CARDS))
+            if (clientServerProtocol.command.Equals(Command.OPEN_CARDS)) 
             {
                 GameViewManager.getInstance(null).CommandOpenCard(clientServerProtocol.cards);
             }

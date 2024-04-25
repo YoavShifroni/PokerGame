@@ -25,6 +25,9 @@ namespace PokerGame
 
         }
 
+        /// <summary>
+        /// the constructor create all the forms that needed for the game
+        /// </summary>
         private GameFormsHolder()
         {
             this.loginForm = new LoginForm();

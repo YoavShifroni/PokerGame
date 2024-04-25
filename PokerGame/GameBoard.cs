@@ -29,7 +29,9 @@ namespace PokerGame
         public List<Tuple<string, int>> usernamsAndTheirMoney;
         private List<Tuple<Point, Point>>[] points;
 
-
+        /// <summary>
+        /// the constructor call to the InitializeComponent that create the board and his controls
+        /// </summary>
         public GameBoard()
         {
             InitializeComponent();
@@ -268,7 +270,9 @@ namespace PokerGame
 
         }
 
-        
+        /// <summary>
+        /// the function fill the label that show some specific deatils with the correct information
+        /// </summary>
         public void SetPlayerMoney()
         {
             this.MoneyTheClientHaveLabel.Text = "Current Money: " + this.playerMoney.ToString();
@@ -282,6 +286,12 @@ namespace PokerGame
             // visible to number of players -1
         }
 
+        /// <summary>
+        /// the function check that when someone change the text in the valueTextBox that he fill it with
+        /// only numbers and that he didn't put negetive number or number that he don't have
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void valueTextBox_TextChanged(object sender, EventArgs e)
         {
             if (valueTextBox.Text.Length > 0)
@@ -325,7 +335,12 @@ namespace PokerGame
             }
         }
 
-
+        /// <summary>
+        /// when someone click the bet button this function will send to the server
+        /// the Command RAISE
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void betButton_Click(object sender, EventArgs e)
         {
 
@@ -351,7 +366,14 @@ namespace PokerGame
             this.AfterMyTurn();
         }
 
-
+        /// <summary>
+        /// the function is called after someone finish their turn and will change if it's nececry
+        /// the amount of money that is on the table and will write in the action label
+        /// the raise type that the player did
+        /// </summary>
+        /// <param name="betMoney"></param>
+        /// <param name="username"></param>
+        /// <param name="raiseType"></param>
         public void sumBetMoney(int betMoney, string username, string raiseType)
         {
             this.totalBetMoney += betMoney;
@@ -390,8 +412,15 @@ namespace PokerGame
             }
         }
 
+        /// <summary>
+        /// the function check what is the number that apper in labelName that show the
+        /// name of the username that the function get and will string that contain
+        /// the number at the end of the labelName (id)
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         private string GetLabelId(string username)
-        {
+        { 
             string name = null;
             foreach (Control control in Controls)
             {
@@ -424,6 +453,11 @@ namespace PokerGame
             return userId;
         }
 
+        /// <summary>
+        /// the function is called when it's someone turn and will change all the things that
+        /// the player need so he could play
+        /// </summary>
+        /// <param name="minimumBet"></param>
         public void MyTurn(int minimumBet)
         {
             if(this.playerMoney == 0 && this.fold == false)
@@ -459,7 +493,10 @@ namespace PokerGame
                 this.countDownTimer.Start();
             }
         }
-
+        /// <summary>
+        /// the function is called when someone finish their turn and will change all the things that
+        /// needed so the player couldn't play
+        /// </summary>
         private void AfterMyTurn()
         {
             this.trackBar1.Visible = false;
@@ -478,7 +515,12 @@ namespace PokerGame
             this.turnTimeLabel.Text = "";
         }
 
-
+        
+        /// <summary>
+        /// the function show to the other players that it's not their turn now who turn it is
+        /// by write in is actionLabel three points - ". . ."
+        /// </summary>
+        /// <param name="username"></param>
         public void NotifyTurn(string username)
         {
             string userId = this.GetLabelId(username);
@@ -495,6 +537,12 @@ namespace PokerGame
         }
 
 
+        /// <summary>
+        /// the function handle the gameboard when there is a winner
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="allPlayerAndCards"></param>
+        /// <param name="oneWinnerName"></param>
         public void TheWinnerIs(string username, string allPlayerAndCards, string oneWinnerName)
         {
             this.oneWinnerName = oneWinnerName;
@@ -569,8 +617,15 @@ namespace PokerGame
             this.nextGameTimer.Start();
 
         }
+        
 
-
+        /// <summary>
+        /// the function is called when it's the player turn right now and than the timer will start
+        /// to work, the function count downword from 40 to 0 and when it gets to 0 the function
+        /// will automticly fold the player
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void countDownTimer_Tick(object sender, EventArgs e)
         {
 
@@ -582,7 +637,13 @@ namespace PokerGame
             }
         }
 
-
+        /// <summary>
+        /// the function is called when there is a winner and than the timer will start
+        /// to work, the function count downword from (8 + the number of players connected) to 0
+        /// and when it gets to 0 the function will automticly restart the game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nextGameTimer_Tick(object sender, EventArgs e)
         {
             this.timerForNextGameLabel.Text = "Next Game Will Start In: " + this.seconds.ToString();
@@ -593,18 +654,11 @@ namespace PokerGame
             }
             this.seconds--;
         }
-        
-
-        //public void AppendText(RichTextBox box, string text, Color color)
-        //{
-        //    box.SelectionStart = box.TextLength;
-        //    box.SelectionLength = 0;
-
-        //    box.SelectionColor = color;
-        //    box.AppendText(text);
-        //    box.SelectionColor = box.ForeColor;
-        //}
-
+       
+        /// <summary>
+        /// the functuon will called when a new game is about to begin and will change all
+        /// the things that needed so the game could start again
+        /// </summary>
         public void RestartGame()
         {
             if (this.username.Equals(this.oneWinnerName))
@@ -638,6 +692,10 @@ namespace PokerGame
 
         }
 
+        /// <summary>
+        /// the function create array of List that contain Tuple with two values of Points
+        /// and will give the array the values that needed
+        /// </summary>
         private void initiliazeMainPictureBoxLocation()
         {
             this.points = new List<Tuple<Point, Point>>[7];
@@ -676,6 +734,10 @@ namespace PokerGame
 
         }
 
+        /// <summary>
+        /// the function is called when the game is about to bagin and will genercly create
+        /// some pictureBoxes and lebels that will show all the players that are connected
+        /// </summary>
         public void CreatePicturesForPlayers()
         {
             this.initiliazeMainPictureBoxLocation();
@@ -766,6 +828,10 @@ namespace PokerGame
 
         }
 
+        /// <summary>
+        /// the function will remove the control if he is already exist
+        /// </summary>
+        /// <param name="name"></param>
         private void RemoveComponentIfExist(string name)
         {
             Control[] componentToRemove = this.Controls.Find(name, true);
@@ -776,6 +842,13 @@ namespace PokerGame
             }
         }
 
+        /// <summary>
+        /// the function is called when the game board is firt load and will check if the board
+        /// is fit for the screen of the user and if it isn't the function will
+        /// reduce the size of the game board and his controls
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameBoard_Load(object sender, EventArgs e)
         {
             Rectangle resolutionRect = System.Windows.Forms.Screen.FromControl(this).Bounds;

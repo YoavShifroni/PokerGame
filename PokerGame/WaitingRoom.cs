@@ -12,7 +12,10 @@ namespace PokerGame
 {
     public partial class WaitingRoom : Form
     {
-
+        /// <summary>
+        /// the constructor is call the InitializeComponent that create the WaitingRoom form
+        /// and his controls
+        /// </summary>
         public WaitingRoom()
         {
             InitializeComponent();

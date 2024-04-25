@@ -13,6 +13,9 @@ namespace PokerGame
 {
     public partial class LoginForm : Form
     {
+        /// <summary>
+        /// the constructor call the InitializeComponent which create the Login form and his controls
+        /// </summary>
         public LoginForm()
         {
             InitializeComponent();
