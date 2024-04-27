@@ -42,6 +42,8 @@
             this.serverIpLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.changePasswordLabel = new System.Windows.Forms.Label();
+            this.rulesBookPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.rulesBookPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // passwordTextBox
@@ -94,7 +96,7 @@
             this.startLabel.AutoSize = true;
             this.startLabel.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(86)))), ((int)(((byte)(174)))));
-            this.startLabel.Location = new System.Drawing.Point(29, 65);
+            this.startLabel.Location = new System.Drawing.Point(29, 53);
             this.startLabel.Name = "startLabel";
             this.startLabel.Size = new System.Drawing.Size(155, 27);
             this.startLabel.TabIndex = 5;
@@ -203,12 +205,25 @@
             this.changePasswordLabel.Text = "Click Here";
             this.changePasswordLabel.Click += new System.EventHandler(this.changePasswordLabel_Click);
             // 
+            // rulesBookPictureBox
+            // 
+            this.rulesBookPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.rulesBookPictureBox.Image = global::PokerGame.Properties.Resources.RulesBook;
+            this.rulesBookPictureBox.Location = new System.Drawing.Point(201, 24);
+            this.rulesBookPictureBox.Name = "rulesBookPictureBox";
+            this.rulesBookPictureBox.Size = new System.Drawing.Size(76, 87);
+            this.rulesBookPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.rulesBookPictureBox.TabIndex = 28;
+            this.rulesBookPictureBox.TabStop = false;
+            this.rulesBookPictureBox.Click += new System.EventHandler(this.rulesBookPictureBox_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(289, 602);
+            this.Controls.Add(this.rulesBookPictureBox);
             this.Controls.Add(this.changePasswordLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.serverIpTextBox);
@@ -230,6 +245,7 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LoginForm";
+            ((System.ComponentModel.ISupportInitialize)(this.rulesBookPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,5 +267,6 @@
         private System.Windows.Forms.Label serverIpLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label changePasswordLabel;
+        private System.Windows.Forms.PictureBox rulesBookPictureBox;
     }
 }

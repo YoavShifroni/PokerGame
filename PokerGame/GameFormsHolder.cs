@@ -14,9 +14,11 @@ namespace PokerGame
     {
         public LoginForm loginForm;
         public RegisterForm registerForm;
+        public RulesForm rulesForm;
         public ForgotPasswordForm forgotPasswordForm;
         public WaitingRoom waitingRoom;
         public GameBoard gameBoard;
+        
         private static GameFormsHolder instance;
         /// <summary>
         /// Static getInstance method, as in Singleton patterns
@@ -39,6 +41,7 @@ namespace PokerGame
         {
             this.loginForm = new LoginForm();
             this.registerForm = new RegisterForm();
+            this.rulesForm = new RulesForm();
             this.forgotPasswordForm = new ForgotPasswordForm();
             this.waitingRoom = new WaitingRoom();
             this.gameBoard = new GameBoard();

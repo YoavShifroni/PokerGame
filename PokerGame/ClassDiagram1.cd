@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="PokerGame.ClientServerProtocol" Collapsed="true">
+    <Position X="14.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAJAEAAABABAAgACgAiMECJBQIAAAAQAAADgAAAGA=</HashCode>
+      <FileName>ClientServerProtocol.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokerGame.ConnectionWithServer" Collapsed="true">
+    <Position X="13" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAACAAAAAAADBAAAQAAAAQBAAEAAA=</HashCode>
+      <FileName>ConnectionWithServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokerGame.ForgotPasswordForm" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAIAAAAASAAIgAAACCABAFCIAAAAAAACFAgAAAAAEA=</HashCode>
+      <FileName>ForgotPasswordForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokerGame.GameBoard" Collapsed="true">
+    <Position X="13" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAkQRIGggKAAVhcAkCCUlIEKEBECwAQAiKgokiIWgYI=</HashCode>
+      <FileName>GameBoard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokerGame.GameFormsHolder" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAIIAAFAAAAIAAAAAAAAAAAAABAAAQAAAAAAABAAAA=</HashCode>
+      <FileName>GameFormsHolder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokerGame.GameViewManager" Collapsed="true">
+    <Position X="13" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAqAIAgAiAEAAgAAAAQACgUAJABIAAQAACAAAAAAAAA=</HashCode>
+      <FileName>GameViewManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokerGame.HandleCommandsFromServer" Collapsed="true">
+    <Position X="13" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HandleCommandsFromServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokerGame.LabelCircle" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LabelCircle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokerGame.LoginForm" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAIAAQAAAWAAIhAAACCABAASYAAAEAAAIBAAAQgAgkA=</HashCode>
+      <FileName>LoginForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokerGame.Program" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokerGame.RegisterForm" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACIAAAQgAWBAJgAiDCCQBAADYBAAgAAAIBBAAQgAhEA=</HashCode>
+      <FileName>RegisterForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokerGame.RulesForm" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAACAAIBAAAACAAAACAAAAEAAAABAAAQAAABA=</HashCode>
+      <FileName>RulesForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokerGame.WaitingRoom" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQCAABAAAAACAAIACAAAAAgAwAAAAAAAAAAA=</HashCode>
+      <FileName>WaitingRoom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="PokerGame.Command" Collapsed="true">
+    <Position X="16.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAABBAAkEABCAACABEAAAAAACAQABAAAAAAAQAA=</HashCode>
+      <FileName>ClientServerProtocol.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

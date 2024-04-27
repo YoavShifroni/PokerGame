@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -96,9 +97,10 @@ namespace PokerGame
         /// <param name="e"></param>
         private void changePasswordLabel_Click(object sender, EventArgs e)
         {
-            if(usernameTextBox.Text.Length <= 1)
+            IPAddress iPAddress = null;
+            if(usernameTextBox.Text.Length <= 1 || !IPAddress.TryParse(serverIpTextBox.Text, out iPAddress))
             {
-                MessageBox.Show("please fill your username first");
+                MessageBox.Show("please fill your username and server ip first");
                 return;
             }
             GameViewManager.getInstance(serverIpTextBox.Text).ProcessForgotPassword(usernameTextBox.Text);
@@ -107,5 +109,15 @@ namespace PokerGame
             this.Visible = false;
 
         }
+
+       
+
+        private void rulesBookPictureBox_Click(object sender, EventArgs e)
+        {
+            GameFormsHolder.getInstance().rulesForm.Visible = true;
+            this.Visible = false;
+        }
+
+        
     }
 }

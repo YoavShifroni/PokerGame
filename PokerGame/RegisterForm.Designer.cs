@@ -50,6 +50,8 @@
             this.serverIpTextBox = new System.Windows.Forms.TextBox();
             this.serverIpLabel = new System.Windows.Forms.Label();
             this.showPasswordCheckBox = new System.Windows.Forms.CheckBox();
+            this.rulesBookPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.rulesBookPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // startLabel
@@ -349,12 +351,25 @@
             this.showPasswordCheckBox.UseVisualStyleBackColor = true;
             this.showPasswordCheckBox.CheckedChanged += new System.EventHandler(this.showPasswordCheckBox_CheckedChanged);
             // 
+            // rulesBookPictureBox
+            // 
+            this.rulesBookPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.rulesBookPictureBox.Image = global::PokerGame.Properties.Resources.RulesBook;
+            this.rulesBookPictureBox.Location = new System.Drawing.Point(484, 12);
+            this.rulesBookPictureBox.Name = "rulesBookPictureBox";
+            this.rulesBookPictureBox.Size = new System.Drawing.Size(89, 100);
+            this.rulesBookPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.rulesBookPictureBox.TabIndex = 30;
+            this.rulesBookPictureBox.TabStop = false;
+            this.rulesBookPictureBox.Click += new System.EventHandler(this.rulesBookPictureBox_Click);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(595, 645);
+            this.Controls.Add(this.rulesBookPictureBox);
             this.Controls.Add(this.showPasswordCheckBox);
             this.Controls.Add(this.serverIpTextBox);
             this.Controls.Add(this.serverIpLabel);
@@ -384,6 +399,7 @@
             this.Name = "RegisterForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.rulesBookPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -413,5 +429,6 @@
         private System.Windows.Forms.TextBox serverIpTextBox;
         private System.Windows.Forms.Label serverIpLabel;
         private System.Windows.Forms.CheckBox showPasswordCheckBox;
+        private System.Windows.Forms.PictureBox rulesBookPictureBox;
     }
 }

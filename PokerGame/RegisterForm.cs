@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -32,11 +33,10 @@ namespace PokerGame
         /// <param name="e"></param>
         private void registerButton_Click(object sender, EventArgs e)
         {
-            string checkIp = this.serverIpTextBox.Text;
-            string[] check = checkIp.Split('.');
-            if (check.Length != 4)
+            IPAddress iPAddress = null;
+            if (!IPAddress.TryParse(serverIpTextBox.Text, out iPAddress))
             {
-                MessageBox.Show("check the server Ip");
+                MessageBox.Show("check the server Ip, Registration Failed");
                 return;
             }
             if (this.isFilled())
@@ -91,25 +91,26 @@ namespace PokerGame
         /// <returns>True if all fields are correct</returns>
         private bool isFilled()
         {
-            if (usernameTextBox.Text.Length <= 3)
+            if (usernameTextBox.Text.Length <= 3 || usernameTextBox.Text.Length > 20)
             {
-                MessageBox.Show("fix name, Registration Failed");
+                MessageBox.Show("your username should be between 4-20 letters, please fix it, Regestration Failed");
                 return false;
             }
-            if (!this.IsValidPassword(passwordTextBox.Text))
+            if (!RegisterForm.IsValidPassword(passwordTextBox.Text))
             {
-                MessageBox.Show("fix password, Registration Failed");
+                MessageBox.Show("your password should contain at least: one capital letter, one small letter, one digit, one sign " +
+                    "and at least five letters, please fix it, Regestration Failed");
                 return false;
 
             }
-            if (firstNameTextBox.Text.Length <= 1)
+            if (firstNameTextBox.Text.Length <= 1 || firstNameTextBox.Text.Length > 40)
             {
-                MessageBox.Show("fix firstName, Registration Failed");
+                MessageBox.Show("your first name should be between 2-40 letters, please fix it, Regestration Failed");
                 return false;
             }
-            if (lastNameTextBox.Text.Length <= 1)
+            if (lastNameTextBox.Text.Length <= 1 || lastNameTextBox.Text.Length > 40)
             {
-                MessageBox.Show("fix lastName, Registration Failed");
+                MessageBox.Show("your last name should be between 2-40 letters, please fix it, Regestration Failed");
                 return false;
             }
             if (!this.IsValidEmail(emailTextBox.Text))
@@ -182,6 +183,12 @@ namespace PokerGame
             {
                 this.passwordTextBox.PasswordChar = '•';
             }
+        }
+
+        private void rulesBookPictureBox_Click(object sender, EventArgs e)
+        {
+            GameFormsHolder.getInstance().rulesForm.Visible = true;
+            this.Visible = false;
         }
     }
 }

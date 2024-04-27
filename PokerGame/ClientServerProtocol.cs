@@ -83,7 +83,7 @@ namespace PokerGame
         public string newPassword {  get; set; }
 
         /// <summary>
-        /// 
+        /// empty constructor
         /// </summary>
         public ClientServerProtocol()
         {
@@ -259,9 +259,6 @@ namespace PokerGame
             return answer;
         }
 
-        public void SetOpenCard(string card, int index)
-        {
-            this.cards[index] = card;
-        }
+       
     }
 }

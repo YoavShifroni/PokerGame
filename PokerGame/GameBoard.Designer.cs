@@ -85,7 +85,7 @@
             this.raiseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.raiseButton.Location = new System.Drawing.Point(1240, 966);
             this.raiseButton.Name = "raiseButton";
-            this.raiseButton.Size = new System.Drawing.Size(236, 165);
+            this.raiseButton.Size = new System.Drawing.Size(237, 165);
             this.raiseButton.TabIndex = 2;
             this.raiseButton.Text = "Raise";
             this.raiseButton.UseVisualStyleBackColor = false;
@@ -278,7 +278,7 @@
             this.theWinnerIsLabel.BackColor = System.Drawing.Color.White;
             this.theWinnerIsLabel.Font = new System.Drawing.Font("David", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.theWinnerIsLabel.ForeColor = System.Drawing.Color.Black;
-            this.theWinnerIsLabel.Location = new System.Drawing.Point(3, 9);
+            this.theWinnerIsLabel.Location = new System.Drawing.Point(12, 13);
             this.theWinnerIsLabel.Name = "theWinnerIsLabel";
             this.theWinnerIsLabel.Size = new System.Drawing.Size(462, 156);
             this.theWinnerIsLabel.TabIndex = 23;
@@ -328,7 +328,7 @@
             // timerForNextGameLabel
             // 
             this.timerForNextGameLabel.Font = new System.Drawing.Font("Segoe UI Variable Display", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timerForNextGameLabel.Location = new System.Drawing.Point(594, 966);
+            this.timerForNextGameLabel.Location = new System.Drawing.Point(595, 966);
             this.timerForNextGameLabel.Name = "timerForNextGameLabel";
             this.timerForNextGameLabel.Size = new System.Drawing.Size(882, 165);
             this.timerForNextGameLabel.TabIndex = 31;
