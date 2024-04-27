@@ -185,6 +185,11 @@ namespace PokerGame
             }
         }
 
+        /// <summary>
+        /// if someone clicks the rulesBookPictureBox this function will send him to the Rules Form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rulesBookPictureBox_Click(object sender, EventArgs e)
         {
             GameFormsHolder.getInstance().rulesForm.Visible = true;

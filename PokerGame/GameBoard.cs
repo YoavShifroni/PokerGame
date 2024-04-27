@@ -10,23 +10,78 @@ namespace PokerGame
 {
     public partial class GameBoard : Form
     {
+        /// <summary>
+        /// the bool check whether the user clicked on the raise button for the first/ second time
+        /// </summary>
         private bool clickedForTheSecondTime = false;
+        /// <summary>
+        /// the bool check if the user is dragging the track bar right now
+        /// </summary>
         private bool isDargging = false;
+        /// <summary>
+        /// the bool check if it's the first round of the game (no community cards are open)
+        /// </summary>
         private bool firstRound = true;
+        /// <summary>
+        /// the bool check if the game is over
+        /// </summary>
         private bool gameIsOver = false;
+        /// <summary>
+        /// the bool check if the player folded
+        /// </summary>
         private bool fold = false;
+        /// <summary>
+        /// the total bet money that the player bet in this round
+        /// </summary>
         private int totalBetMoney = 0;
+        /// <summary>
+        /// how much money does the player has
+        /// </summary>
         public int playerMoney;
+        /// <summary>
+        /// the all time profit that the player won
+        /// </summary>
         public int allTimeProfit;
+        /// <summary>
+        /// second for turn (40 second for turn)
+        /// </summary>
         private int seconds;
+        /// <summary>
+        /// the username of the player
+        /// </summary>
         public string username = "";
+        /// <summary>
+        /// the mininmum bet that you can bet right now
+        /// </summary>
         public int minimumBet;
+        /// <summary>
+        /// the username of the dealer
+        /// </summary>
         public string dealerUsername;
+        /// <summary>
+        /// the username of the small blind
+        /// </summary>
         public string smallBlindUsername;
+        /// <summary>
+        /// the username of the big blind
+        /// </summary>
         public string bigBlindUsername;
+        /// <summary>
+        /// the username of one of the players that won
+        /// </summary>
         public string oneWinnerName;
+        /// <summary>
+        /// the numebr of players that are connected to the game right now
+        /// </summary>
         public int playersNumber;
+        /// <summary>
+        /// list that contain all username and how much money they have
+        /// </summary>
         public List<Tuple<string, int>> usernamsAndTheirMoney;
+        /// <summary>
+        /// array of list that contain specific point to create the picture boxes and labels according to how many players 
+        /// are in the game right now
+        /// </summary>
         private List<Tuple<Point, Point>>[] points;
 
         /// <summary>
@@ -91,7 +146,7 @@ namespace PokerGame
         {
             ClientServerProtocol clientServerProtocol = new ClientServerProtocol();
             clientServerProtocol.command = Command.CHECK;
-            ConnectionWithServer.getOpenInstance().SendMessage(clientServerProtocol.generate());
+            ConnectionWithServer.getInstance(null).SendMessage(clientServerProtocol.generate());
             this.AfterMyTurn();
         }
 
@@ -107,7 +162,7 @@ namespace PokerGame
             this.fold = true;
             ClientServerProtocol clientServerProtocol = new ClientServerProtocol();
             clientServerProtocol.command = Command.FOLD;
-            ConnectionWithServer.getOpenInstance().SendMessage(clientServerProtocol.generate());
+            ConnectionWithServer.getInstance(null).SendMessage(clientServerProtocol.generate());
             this.AfterMyTurn();
             this.raiseButton.BackColor = Color.White;
             this.foldButton.BackColor = Color.White;
@@ -364,7 +419,7 @@ namespace PokerGame
             ClientServerProtocol clientServerProtocol = new ClientServerProtocol();
             clientServerProtocol.command = Command.RAISE;
             clientServerProtocol.betMoney = moneyToBet;
-            ConnectionWithServer.getOpenInstance().SendMessage(clientServerProtocol.generate());
+            ConnectionWithServer.getInstance(null).SendMessage(clientServerProtocol.generate());
             this.AfterMyTurn();
         }
 

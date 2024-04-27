@@ -13,7 +13,9 @@ namespace PokerGame
     /// </summary>
     public class HandleCommandsFromServer
     {
-
+        /// <summary>
+        /// empty constructor
+        /// </summary>
         public HandleCommandsFromServer() 
         {
             

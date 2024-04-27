@@ -11,10 +11,25 @@ namespace PokerGame
 {
      public class ConnectionWithServer
      {
+        /// <summary>
+        /// the port number
+        /// </summary>
         private const int portNo = 500;
+        /// <summary>
+        /// actual TCP connection between the client and the server
+        /// </summary>
         private TcpClient client;
+        /// <summary>
+        /// the memory we allocate to recive things from the server and sending things to the server
+        /// </summary>
         private byte[] data;
+        /// <summary>
+        /// HandleCommandFromServer object
+        /// </summary>
         private HandleCommandsFromServer handleCommandsFromServer;
+        /// <summary>
+        /// the instance of this class per singleton design pattern
+        /// </summary>
         private static ConnectionWithServer instance = null;
 
         /// <summary>
@@ -33,18 +48,15 @@ namespace PokerGame
         {
             if(instance == null)
             {
+                if(ipAddress == null)
+                {
+                    throw new ArgumentNullException("ip address cannot be null when instance is null");
+                }
                 instance = new ConnectionWithServer(ipAddress);
             }
             return instance;
         }
-        /// <summary>
-        /// This function returns the instance of the connection to the server, only if it was already created 
-        /// </summary>
-        /// <returns></returns>
-        public static ConnectionWithServer getOpenInstance()
-        {
-            return instance;
-        }
+        
         /// <summary>
         /// Private constructor of the class, as per Singleton pattern
         /// </summary>

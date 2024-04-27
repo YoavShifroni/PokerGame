@@ -14,10 +14,21 @@ namespace PokerGame
     /// </summary>
     public class GameViewManager
     {
+        /// <summary>
+        /// ConnectionWithServer object
+        /// </summary>
         public ConnectionWithServer connectionWithServer;
+        /// <summary>
+        /// the code that sent to the client email
+        /// </summary>
         public string code;
+        /// <summary>
+        /// the username of the client that forgot his password
+        /// </summary>
         public string username;
-
+        /// <summary>
+        /// the instance of this class per singleton design pattern
+        /// </summary>
         private static GameViewManager instance = null;
         
         /// <summary>
@@ -76,7 +87,8 @@ namespace PokerGame
         /// <param name="email">The new email address</param>
         /// <param name="city">The new city</param>
         /// <param name="gender">The new gender</param>
-        public void ProcessRegister(string username, string password, string firstName, string lastName, string email, string city, string gender)
+        public void ProcessRegister(string username, string password, string firstName, string lastName, string email
+            , string city,string gender)
         {
             ClientServerProtocol message = new ClientServerProtocol();
             message.command = Command.REGISTRATION;
@@ -126,7 +138,8 @@ namespace PokerGame
         /// the private constructor create the connection with the server
         /// </summary>
         /// <param name="ipAddress">The IP address of the server</param>
-        private GameViewManager(string ipAddress) {
+        private GameViewManager(string ipAddress)
+        {
             this.connectionWithServer = ConnectionWithServer.getInstance(ipAddress);
         }
 

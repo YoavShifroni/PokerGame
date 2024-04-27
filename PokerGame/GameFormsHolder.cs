@@ -12,13 +12,33 @@ namespace PokerGame
     /// </summary>
     public class GameFormsHolder
     {
+        /// <summary>
+        /// the login form
+        /// </summary>
         public LoginForm loginForm;
+        /// <summary>
+        /// the register form
+        /// </summary>
         public RegisterForm registerForm;
+        /// <summary>
+        /// the rules form
+        /// </summary>
         public RulesForm rulesForm;
+        /// <summary>
+        /// the forgot password form
+        /// </summary>
         public ForgotPasswordForm forgotPasswordForm;
+        /// <summary>
+        /// the waiting room form
+        /// </summary>
         public WaitingRoom waitingRoom;
+        /// <summary>
+        /// the game board form
+        /// </summary>
         public GameBoard gameBoard;
-        
+        /// <summary>
+        /// the instance of this class per singleton design pattern
+        /// </summary>
         private static GameFormsHolder instance;
         /// <summary>
         /// Static getInstance method, as in Singleton patterns

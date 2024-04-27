@@ -13,6 +13,9 @@ namespace PokerGame
 {
     public partial class ForgotPasswordForm : Form
     {
+        /// <summary>
+        /// contain the username
+        /// </summary>
         private string username;
 
         /// <summary>

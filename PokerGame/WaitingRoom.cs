@@ -30,7 +30,7 @@ namespace PokerGame
         {
             ClientServerProtocol clientServerProtocol = new ClientServerProtocol();
             clientServerProtocol.command = Command.START_GAME;
-            ConnectionWithServer.getOpenInstance().SendMessage(clientServerProtocol.generate());
+            ConnectionWithServer.getInstance(null).SendMessage(clientServerProtocol.generate());
         }
 
         /// <summary>
