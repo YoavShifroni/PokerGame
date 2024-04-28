@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,6 +45,8 @@ namespace PokerGame
         /// Static getInstance method, as in Singleton patterns
         /// </summary>
         /// <returns></returns>
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static GameFormsHolder getInstance()
         {
             if(GameFormsHolder.instance == null)

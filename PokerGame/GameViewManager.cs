@@ -47,6 +47,8 @@ namespace PokerGame
         /// <param name="ipAddress">IP address of the server</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static GameViewManager getInstance(string ipAddress)
         {
             if(GameViewManager.instance != null)

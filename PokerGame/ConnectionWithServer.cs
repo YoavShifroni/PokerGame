@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -44,6 +45,8 @@ namespace PokerGame
         /// </summary>
         /// <param name="ipAddress">The IP address of the server</param>
         /// <returns></returns>
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static ConnectionWithServer getInstance(string ipAddress)
         {
             if(instance == null)
