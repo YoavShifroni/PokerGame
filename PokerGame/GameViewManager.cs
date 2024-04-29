@@ -179,12 +179,12 @@ namespace PokerGame
                 int money = Convert.ToInt32(details[i + 1]);
                 GameFormsHolder.getInstance().gameBoard.usernamsAndTheirMoney.Add(Tuple.Create(username, money));
             }
-
-            GameFormsHolder.getInstance().waitingRoom.Visible = false;
-            GameFormsHolder.getInstance().gameBoard.Visible = true;
             GameFormsHolder.getInstance().gameBoard.SetPlayerMoney();
             GameFormsHolder.getInstance().gameBoard.CreatePicturesForPlayers();
             GameFormsHolder.getInstance().gameBoard.ResetBoard();
+            GameFormsHolder.getInstance().waitingRoom.Visible = false;
+            GameFormsHolder.getInstance().gameBoard.Visible = true;
+            
         }
 
         /// <summary>

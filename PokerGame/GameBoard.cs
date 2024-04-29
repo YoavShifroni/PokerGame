@@ -938,6 +938,7 @@ namespace PokerGame
                     float fontSize = (float)(control.Font.Size * 0.7);
                     control.Font = new Font(control.Font.Name, fontSize);
                 }
+
             }
         }
 
