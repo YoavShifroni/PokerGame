@@ -184,6 +184,7 @@ namespace PokerGame
             GameFormsHolder.getInstance().gameBoard.Visible = true;
             GameFormsHolder.getInstance().gameBoard.SetPlayerMoney();
             GameFormsHolder.getInstance().gameBoard.CreatePicturesForPlayers();
+            GameFormsHolder.getInstance().gameBoard.ResetBoard();
         }
 
         /// <summary>

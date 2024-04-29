@@ -713,8 +713,7 @@ namespace PokerGame
         }
        
         /// <summary>
-        /// the functuon will called when a new game is about to begin and will change all
-        /// the things that needed so the game could start again
+        /// the functuon will call the function to send to the server the Command START_GAME
         /// </summary>
         public void RestartGame()
         {
@@ -722,6 +721,18 @@ namespace PokerGame
             {
                 WaitingRoom.StartButton_Click(null, null);
             }
+            
+
+        }
+
+        /// <summary>
+        /// the function restart the board
+        /// </summary>
+        public void ResetBoard()
+        {
+            this.seconds = 0;
+            this.nextGameTimer.Stop();
+            this.countDownTimer.Stop();
             this.clickedForTheSecondTime = false;
             this.isDargging = false;
             this.firstRound = true;
@@ -746,7 +757,6 @@ namespace PokerGame
             this.raiseButton.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.foldButton.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.checkButton.BackColor = System.Drawing.SystemColors.ButtonShadow;
-
         }
 
         /// <summary>
@@ -930,5 +940,7 @@ namespace PokerGame
                 }
             }
         }
+
+        
     }
 }
