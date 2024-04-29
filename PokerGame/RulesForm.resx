@@ -124,11 +124,11 @@ Players and Dealing:
 ·	Texas Hold'em can be played with 2-8 players.
 ·	A dealer button designates who acts last in betting rounds. This button moves clockwise after each hand.
 ·	Blinds (forced bets) are placed by the two players left of the dealer button before each hand: 
-	Small Blind: Posts a smaller fixed amount.
-	Big Blind: Posts a larger fixed amount (usually double the small blind).
+	Small Blind: Posts a smaller fixed amount (5).
+	Big Blind: Posts a larger fixed amount (10).
 
 Cards and Hand Rankings:
-·	Each player receives two hole cards (dealt face down).
+·	Each player receives two hole.
 ·	Five community cards are dealt face up in stages throughout the betting rounds (flop, turn, and river).
 ·	Players use a combination of their two hole cards and the five community cards to create the best five-card poker hand.
 ·	Standard poker hand rankings apply (Royal Flush being the highest, followed by Straight Flush, Four of a Kind, etc.). You can find a detailed explanation of poker hand rankings online or in a poker rulebook.
@@ -137,7 +137,8 @@ Betting Rounds:
 ·	There are four betting rounds in Texas Hold'em: 
 	Preflop: Players can check, raise, or fold based on their hole cards. No community cards are revealed yet.
 	Flop: The first three community cards are revealed. Another round of betting occurs.
-	Turn: The fourth community card is revealed. Another round of betting occurs.o	River: The fifth and final community card is revealed. A final round of betting occurs.
+	Turn: The fourth community card is revealed. Another round of betting occurs.
+	River: The fifth and final community card is revealed. A final round of betting occurs.
 
 Betting Actions:
 ·	In each betting round, players can take the following actions: 
