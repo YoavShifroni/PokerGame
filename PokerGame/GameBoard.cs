@@ -83,6 +83,22 @@ namespace PokerGame
         /// are in the game right now
         /// </summary>
         private List<Tuple<Point, Point>>[] points;
+        /// <summary>
+        /// the bool check if this is the first game
+        /// </summary>
+        public bool isFirstGame = true;
+        /// <summary>
+        /// the bool if the game size is already changed
+        /// </summary>
+        private bool isGameSizeAlreadyChanged = false;
+        /// <summary>
+        /// save the original ratio width
+        /// </summary>
+        private double ratioWidth;
+        /// <summary>
+        /// save the original ratio height
+        /// </summary>
+        private double ratioHeight;
 
         /// <summary>
         /// the constructor call to the InitializeComponent that create the board and his controls
@@ -644,13 +660,17 @@ namespace PokerGame
                     ((Label)this.Controls.Find(labelAction, true)[0]).Visible = false;
                     if (this.playersNumber == 2 || this.playersNumber == 4 || this.playersNumber == 6) // in case of two or four or six players, if we don't do this is looks weird
                     {
-                        if(((PictureBox)this.Controls.Find(pictureBox1, true)[0]).Left == 969)
+                        //   if(((PictureBox)this.Controls.Find(pictureBox1, true)[0]).Left == 969)
+                        int leftPos = ((PictureBox)this.Controls.Find(pictureBox1, true)[0]).Left;
+                        double midFormPos = this.Width / 2;
+                        if (midFormPos + 100 > leftPos && midFormPos - 100 < leftPos)
                         {
+                            double reduce = this.Width * 0.05;
                             ((PictureBox)this.Controls.Find(pictureBox1, true)[0]).Location =
-                            new System.Drawing.Point(((PictureBox)this.Controls.Find(pictureBox1, true)[0]).Left - 97,
+                            new System.Drawing.Point(((PictureBox)this.Controls.Find(pictureBox1, true)[0]).Left - (int)reduce,
                             ((PictureBox)this.Controls.Find(pictureBox1, true)[0]).Top);
                             ((PictureBox)this.Controls.Find(pictureBox2, true)[0]).Location =
-                                 new System.Drawing.Point(((PictureBox)this.Controls.Find(pictureBox2, true)[0]).Left - 97,
+                                 new System.Drawing.Point(((PictureBox)this.Controls.Find(pictureBox2, true)[0]).Left - (int)reduce,
                                  ((PictureBox)this.Controls.Find(pictureBox2, true)[0]).Top);
                             ((Label)this.Controls.Find(labelname, true)[0]).Location =
                                 new System.Drawing.Point(x - 27, ((Label)this.Controls.Find(labelname, true)[0]).Top + 20);
@@ -670,6 +690,7 @@ namespace PokerGame
             this.timerForNextGameLabel.BringToFront();
             this.timerForNextGameLabel.Visible = true;
             this.seconds = 8 + this.playersNumber;
+            this.isFirstGame = false;
             this.countDownTimer.Stop();
             this.nextGameTimer.Start();
 
@@ -689,7 +710,7 @@ namespace PokerGame
             this.turnTimeLabel.Text = this.seconds--.ToString();
             if (this.seconds < 0 && !gameIsOver)
             {
-                //this.foldButton_Click(null, null);
+                this.foldButton_Click(null, null);
                 this.countDownTimer.Stop();
             }
         }
@@ -917,28 +938,37 @@ namespace PokerGame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void GameBoard_Load(object sender, EventArgs e)
+        public void GameBoard_Load(object sender, EventArgs e)
         {
             Rectangle resolutionRect = System.Windows.Forms.Screen.FromControl(this).Bounds;
-            if (this.Width >= resolutionRect.Width || this.Height >= resolutionRect.Height)
+            if (this.Width >= resolutionRect.Width || this.Height >= resolutionRect.Height || this.isGameSizeAlreadyChanged)
             {
-                double ratio = this.Width / this.Height;
-                int newWidth = (int)(resolutionRect.Width * 0.7);
-                int newHeight = (int)(resolutionRect.Height * 0.7 * ratio);
-                double ratioWidth = (double)newWidth / (double)this.Width;
-                double ratioHeight = (double)newHeight / (double)this.Height;
-                this.Width = newWidth;
-                this.Height = newHeight;
+                if (this.isGameSizeAlreadyChanged == false)
+                {
+                    this.isGameSizeAlreadyChanged = true;
+                    double ratio = this.Width / this.Height;
+                    int newWidth = (int)(resolutionRect.Width * 0.7);
+                    int newHeight = (int)(resolutionRect.Height * 0.7 * ratio);
+                    this.ratioWidth = (double)newWidth / (double)this.Width;
+                    this.ratioHeight = (double)newHeight / (double)this.Height;
+                    this.Width = newWidth;
+                    this.Height = newHeight;
+                }
+               
                 foreach (Control control in this.Controls)
                 {
-                    control.Width = (int)(control.Width * ratioWidth);
-                    control.Height = (int)(control.Height * ratioHeight);
-                    control.Left = (int)(control.Left * ratioWidth);
-                    control.Top = (int)(control.Top * ratioHeight);
-                    float fontSize = (float)(control.Font.Size * 0.7);
-                    control.Font = new Font(control.Font.Name, fontSize);
+                    if (isFirstGame || control.Name.StartsWith("playerCard_") || control.Name.StartsWith("playerCard2_") ||
+                            control.Name.StartsWith("showMoney_") || control.Name.StartsWith("showName_") ||
+                            control.Name.StartsWith("showAction_"))
+                    {
+                        control.Width = (int)(control.Width * this.ratioWidth);
+                        control.Height = (int)(control.Height * this.ratioHeight);
+                        control.Left = (int)(control.Left * this.ratioWidth);
+                        control.Top = (int)(control.Top * this.ratioHeight);
+                        float fontSize = (float)(control.Font.Size * 0.7);
+                        control.Font = new Font(control.Font.Name, fontSize);
+                    }
                 }
-
             }
         }
 

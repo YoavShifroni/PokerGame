@@ -184,6 +184,10 @@ namespace PokerGame
             GameFormsHolder.getInstance().gameBoard.ResetBoard();
             GameFormsHolder.getInstance().waitingRoom.Visible = false;
             GameFormsHolder.getInstance().gameBoard.Visible = true;
+            if(GameFormsHolder.getInstance().gameBoard.isFirstGame == false)
+            {
+                GameFormsHolder.getInstance().gameBoard.GameBoard_Load(null,null);
+            }
             
         }
 

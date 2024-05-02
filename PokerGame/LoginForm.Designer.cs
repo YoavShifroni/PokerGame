@@ -57,7 +57,6 @@
             this.passwordTextBox.PasswordChar = '•';
             this.passwordTextBox.Size = new System.Drawing.Size(216, 25);
             this.passwordTextBox.TabIndex = 9;
-            this.passwordTextBox.Text = "Yh123!";
             this.passwordTextBox.WordWrap = false;
             // 
             // passwordLabel
@@ -79,7 +78,6 @@
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.Size = new System.Drawing.Size(216, 25);
             this.usernameTextBox.TabIndex = 7;
-            this.usernameTextBox.Text = "yoav";
             this.usernameTextBox.WordWrap = false;
             // 
             // usernameLabel
@@ -174,7 +172,6 @@
             this.serverIpTextBox.Name = "serverIpTextBox";
             this.serverIpTextBox.Size = new System.Drawing.Size(216, 25);
             this.serverIpTextBox.TabIndex = 25;
-            this.serverIpTextBox.Text = "127.0.0.1";
             // 
             // serverIpLabel
             // 
