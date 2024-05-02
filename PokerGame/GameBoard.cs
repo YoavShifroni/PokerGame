@@ -678,10 +678,7 @@ namespace PokerGame
                     }
                     
                 }
-                else
-                {
-                    Console.WriteLine("Stom:" + userId + ", " + this.username  + ":" + allPlayerAndCards + "  i=" + i + " playername: " + playerName);
-                }
+               
 
 
             }
