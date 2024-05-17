@@ -11,6 +11,7 @@ namespace PokerGame
     /// </summary>
     public enum Command
     {
+        AES,
         REGISTRATION,
         LOGIN,
         ERROR,
@@ -154,12 +155,16 @@ namespace PokerGame
         /// <summary>
         /// the code that will sent to a player that forgot his password to the mail
         /// </summary>
-        public string code {  get; set; }
+        public string code { get; set; }
 
         /// <summary>
         /// the new password that the client choose for himself
         /// </summary>
-        public string newPassword {  get; set; }
+        public string newPassword { get; set; }
+
+        public byte[] key { get; set; }
+
+        public byte[] iv { get; set; }
 
         /// <summary>
         /// empty constructor
@@ -184,6 +189,10 @@ namespace PokerGame
             {
                 case Command.ERROR:
                     this.message = answer[1];
+                    break;
+                case Command.AES:
+                    this.key = Convert.FromBase64String(answer[1]);
+                    this.iv = Convert.FromBase64String(answer[2]);
                     break;
                 case Command.LOGIN:
                     this.username = answer[1];
@@ -267,6 +276,10 @@ namespace PokerGame
                 case Command.ERROR:
                     answer += message + "\n";
                     break;
+                case Command.AES:
+                    answer += Convert.ToBase64String(this.key) + "\n";
+                    answer += Convert.ToBase64String(this.iv) + "\n";
+                    break;
                 case Command.LOGIN:
                     answer += username + "\n";
                     answer += password + "\n";
@@ -337,7 +350,19 @@ namespace PokerGame
             answer += "\r\n";
             return answer;
         }
+        /// <summary>
+        /// the function set a card in specific place
+        /// </summary>
+        /// <param name="card">the card</param>
+        /// <param name="index">the index to place the card</param>
+        public void SetOpenCard(string card, int index)
+        {
+            this.cards[index] = card;
+        }
 
-       
+
     }
 }
+
+
+

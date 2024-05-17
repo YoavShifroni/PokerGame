@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AESClient.cs" />
     <Compile Include="ClientServerProtocol.cs" />
     <Compile Include="ConnectionWithServer.cs" />
     <Compile Include="ForgotPasswordForm.cs">

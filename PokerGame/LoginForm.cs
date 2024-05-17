@@ -39,7 +39,8 @@ namespace PokerGame
             }
             if (usernameTextBox.Text.Length > 1 && passwordTextBox.Text.Length > 1)
             {
-                GameViewManager.getInstance(serverIpTextBox.Text).ProcessLogin(usernameTextBox.Text, passwordTextBox.Text);
+                GameViewManager.getInstance(serverIpTextBox.Text).isFromLogin = true ;
+
             }
             else
             {

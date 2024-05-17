@@ -13,12 +13,12 @@ namespace PokerGame
     /// </summary>
     public class HandleCommandsFromServer
     {
+
         /// <summary>
         /// empty constructor
         /// </summary>
         public HandleCommandsFromServer() 
         {
-            
         }
 
         /// <summary>
@@ -30,6 +30,31 @@ namespace PokerGame
         {
             Console.WriteLine(command);
             ClientServerProtocol clientServerProtocol = new ClientServerProtocol(command);
+            if (clientServerProtocol.command.Equals(Command.AES))
+            {
+                AESClient.key = clientServerProtocol.key;
+                AESClient.iv = clientServerProtocol.iv;
+                AESClient.initialize = true;
+                if (GameViewManager.getInstance(null).isFromLogin)
+                {
+                    string username = GameFormsHolder.getInstance().loginForm.usernameTextBox.Text;
+                    string password = GameFormsHolder.getInstance().loginForm.passwordTextBox.Text;
+                    GameViewManager.getInstance(null).ProcessLogin(username, password);
+                }
+                else // this mean it's from the registration
+                {
+                    string username = GameFormsHolder.getInstance().registerForm.usernameTextBox.Text;
+                    string password = GameFormsHolder.getInstance().registerForm.passwordTextBox.Text;
+                    string firstName = GameFormsHolder.getInstance().registerForm.firstNameTextBox.Text;
+                    string lastName = GameFormsHolder.getInstance().registerForm.lastNameTextBox.Text;
+                    string email = GameFormsHolder.getInstance().registerForm.emailTextBox.Text;
+                    string city = GameFormsHolder.getInstance().registerForm.city;
+                    string gender = GameFormsHolder.getInstance().registerForm.gender;
+                    GameViewManager.getInstance(null).ProcessRegister(username, password,firstName, lastName, email,
+                       city, gender);
+                }
+
+            }
             if (clientServerProtocol.command.Equals(Command.OPEN_CARDS)) 
             {
                 GameViewManager.getInstance(null).CommandOpenCard(clientServerProtocol.cards);

@@ -26,10 +26,14 @@ namespace PokerGame
         /// the username of the client that forgot his password
         /// </summary>
         public string username;
+
+        public bool isFromLogin;
         /// <summary>
         /// the instance of this class per singleton design pattern
         /// </summary>
         private static GameViewManager instance = null;
+
+
         
         /// <summary>
         /// Destroy the instance when we're done playing
@@ -308,5 +312,7 @@ namespace PokerGame
             GameFormsHolder.getInstance().gameBoard.Invoke(new Action(() => GameFormsHolder.getInstance().gameBoard.GameBoard_FormClosing(null, null)));
             GameViewManager.Destroy();
         }
+
+        
     }
 }

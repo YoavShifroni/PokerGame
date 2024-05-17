@@ -19,6 +19,12 @@ namespace PokerGame
         /// <summary>
         /// the constructor call the InitializeComponent that create the Register form and his controls
         /// </summary>
+        /// 
+        public string city { get; set; }
+
+        public string gender { get; set; }
+
+
         public RegisterForm()
         {
             InitializeComponent();
@@ -41,17 +47,9 @@ namespace PokerGame
             }
             if (this.isFilled())
             {
-                ClientServerProtocol protocol = new ClientServerProtocol();
-                protocol.command = Command.REGISTRATION;
-                protocol.username = usernameTextBox.Text;
-                protocol.password = passwordTextBox.Text;
-                protocol.firstName = firstNameTextBox.Text;
-                protocol.lastName = lastNameTextBox.Text;
-                protocol.email = emailTextBox.Text;
-                protocol.city = cityComboBox.Text;
-                protocol.gender = genderComboBox.Text;
-                GameViewManager.getInstance(this.serverIpTextBox.Text).ProcessRegister(usernameTextBox.Text, passwordTextBox.Text,
-                    firstNameTextBox.Text, lastNameTextBox.Text, emailTextBox.Text, cityComboBox.Text, genderComboBox.Text);        
+                this.city = cityComboBox.Text;
+                this.gender = genderComboBox.Text;
+                GameViewManager.getInstance(serverIpTextBox.Text).isFromLogin = false;
             }
         }
 

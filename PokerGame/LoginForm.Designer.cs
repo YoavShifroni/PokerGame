@@ -250,9 +250,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox passwordTextBox;
+        public System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Label passwordLabel;
-        private System.Windows.Forms.TextBox usernameTextBox;
+        public System.Windows.Forms.TextBox usernameTextBox;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Label startLabel;
         private System.Windows.Forms.CheckBox showPasswordCheckBox;

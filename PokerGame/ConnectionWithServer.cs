@@ -86,7 +86,7 @@ namespace PokerGame
             {
                 // send message to the server
                 NetworkStream ns = client.GetStream();
-                byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
+                byte[] data = AESClient.EncryptStringToBytes(message);
 
                 // send the text
                 ns.Write(data, 0, data.Length);
@@ -121,13 +121,25 @@ namespace PokerGame
                 {
                     // invoke the delegate to display the recived data
                     string textFromServer = System.Text.Encoding.ASCII.GetString(data, 0, bytesRead);
-                    string[] stringSeparators = new string[] { "\r\n" };
-                    string[] lines = textFromServer.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
-                    for (int j = 0; j < lines.Length; j++)
+                    if (AESClient.initialize == false)
                     {
-                        handleCommandsFromServer.handleCommand(lines[j]);
-
+                        handleCommandsFromServer.handleCommand(textFromServer);
                     }
+                    else
+                    {
+                        string[] stringSeparators = new string[] { "\r\n" };
+                        string[] lines = textFromServer.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+                        //byte[] truncArray = new byte[bytesRead];
+                        //Array.Copy(this.data, truncArray, truncArray.Length);
+                        for (int j = 0; j < lines.Length; j++)
+                        {
+                            byte[] encryptedMessage = Convert.FromBase64String(lines[j]);
+                            string commandFromServer = AESClient.DecryptStringFromBytes(encryptedMessage);
+                            handleCommandsFromServer.handleCommand(commandFromServer);
+                        }
+                    }
+                    
+                    
                 }
 
                 // continue reading
